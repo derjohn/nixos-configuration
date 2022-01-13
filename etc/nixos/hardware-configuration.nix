@@ -8,13 +8,15 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
+  # boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "i915.enable_psr=0" ];
   boot.extraModprobeConfig = ''
 options snd-hda-intel model=alc288-dell-xps13
+# options snd_hda_intel power_save=1
 '';
 
   boot.initrd.luks.devices.luksroot = {
@@ -66,5 +68,35 @@ options snd-hda-intel model=alc288-dell-xps13
         vaapiVdpau
         libvdpau-va-gl
       ];
+  };
+
+  powerManagement.enable = true;
+  services = {
+    tlp = {
+      enable = true;
+      settings = {
+      # The following prevents the battery from charging fully to
+      # preserve lifetime. Run `tlp fullcharge` to temporarily force
+      # full charge.
+      # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
+        START_CHARGE_THRESH_BAT0="75";
+        STOP_CHARGE_THRESH_BAT0="80";
+        CPU_SCALING_GOVERNOR_ON_AC="performance";
+        CPU_SCALING_GOVERNOR_ON_BAT="powersave";
+        # 100 being the maximum, limit the speed of my CPU to reduce
+        # heat and increase battery usage:
+        CPU_MAX_PERF_ON_AC=100;
+        CPU_MAX_PERF_ON_BAT=75;
+      };
+    };
+    upower.enable = true;
+    dbus.packages = with pkgs; [
+      miraclecast
+    ];
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      wideArea = false;
+    };
   };
 }

@@ -141,5 +141,10 @@
     nix-index
     stdenv.cc
     killall
+    lm_sensors
+    unzip
+    libguestfs
+    oathToolkit
+    rpl
   ];
 }

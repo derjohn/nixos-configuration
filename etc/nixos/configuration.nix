@@ -7,11 +7,21 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      <nixos-hardware/dell/xps/13-9310>
       ./hardware-configuration.nix
       ./packages.nix
       ./k3s.nix
       <home-manager/nixos>
+      # ./ssh.nix
+      # ./etc.nix
     ];
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+   };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -26,6 +36,7 @@
   networking.hostName = "buckle"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+  environment.etc.hosts.mode = "0644";
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
@@ -58,9 +69,9 @@
     keyMap = "de";
   };
 
-  security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=120
-  '';
+ security.sudo.extraConfig = ''
+   Defaults timestamp_timeout=120
+ '';
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -175,10 +186,10 @@
   system.stateVersion = "21.05"; # Did you read the comment?
 
   services.openvpn.servers = {
-    wpm   = { config = '' config .shared-configs/etc/openvpn/openvpn_wpm.conf ''; };
-    ajssl = { config = '' config .shared-configs/etc/openvpn/aj.sslvpn.services.net-lab.net.conf ''; };
-    crnl  = { config = '' config .shared-configs/etc/openvpn/client/crnl.conf ''; };
-    kmo   = { config = '' config .shared-configs/etc/openvpn/client/kmo.conf ''; };
+    wpm   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/wpm.conf ''; autoStart = false; };
+    ajssl = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/aj.sslvpn.services.net-lab.net.conf ''; autoStart = false; };
+    crnl  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/crnl.conf ''; autoStart = false; };
+    kmo   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/kmo.conf ''; autoStart = false; };
     # spare         = { config = '' config ''; };
   };
 
@@ -200,7 +211,6 @@
 #...and the secrets file has
 #
 #https://nextcloud.domain/remote.php/webdav/ username password
-
   environment.sessionVariables = rec {
     PATH = [ 
       "\${HOME}/bin"
@@ -224,9 +234,13 @@
       ln -sfn /proc/self/fd/2 /dev/stderr
       ln -sfn /run/current-system/sw/bin/bash /bin/bash
       mkdir -p /lib64
-      ln -sfn /nix/store/z56jcx3j1gfyk4sv7g8iaan0ssbdkhz1-glibc-2.33-56/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+      ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+      # ln -sfn /nix/store/z56jcx3j1gfyk4sv7g8iaan0ssbdkhz1-glibc-2.33-56/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
       '';
     };
   };
+
+  home-manager.useGlobalPkgs = true;
+
 }
 
