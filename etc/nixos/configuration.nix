@@ -4,6 +4,8 @@
 
 { config, pkgs, lib, ... }:
 
+let variables = import ./variables.nix; in
+
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -16,23 +18,28 @@
       # ./etc.nix
     ];
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-   };
+  #nix = {
+  #  package = pkgs.nixFlakes;
+    # extraOptions = ''
+    #   experimental-features = nix-command flakes
+    # '';
+  # };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "vga=833" ];
+  boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
+  boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
 
   # hardware.enableAllFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
+ services.journald.extraConfig = ''
+   SystemMaxUse=2G
+  '';
   networking.hostName = "buckle"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
@@ -44,9 +51,12 @@
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
+  networking.enableIPv6 = true;
   networking.useDHCP = false;
   # networking.interfaces.enp0s13f0u1u1.useDHCP = true;
-  networking.interfaces.wlp0s20f3.useDHCP = true;
+  # networking.interfaces.wlp0s20f3.useDHCP = true;
+  networking.dhcpcd.persistent = true;
+  networking.dhcpcd.extraConfig = "";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -69,9 +79,20 @@
     keyMap = "de";
   };
 
- security.sudo.extraConfig = ''
-   Defaults timestamp_timeout=120
- '';
+  # See: https://github.com/NixOS/nixpkgs/blob/nixos-20.09/nixos/modules/security/sudo.nix
+  security.sudo.extraConfig = ''
+    Defaults timestamp_timeout=120
+  '';
+  # security.sudo.wheelNeedsPassword = false;
+  security.sudo.extraRules= [
+    {  groups = [ "wheel" ];
+      commands = [
+        { command = "/run/current-system/sw/bin/systemctl status openvpn*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl stop openvpn*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl start openvpn*"; options = [ "NOPASSWD" ]; }
+      ];
+    }
+  ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -84,20 +105,32 @@
   services.xserver.layout = "de";
   # services.xserver.xkbOptions = "eurosign:e";
 
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
+  services.xserver.inputClassSections = [ ''
+    Identifier         "disable secondary touchscreen inputs ILITEK ILITEK-TP"
+    MatchIsTouchscreen "on"
+    MatchProduct       "ILITEK ILITEK-TP"
+    Option             "Ignore" "on"
+  ''
+  ''
+    Identifier         "disable secondary touchscreen inputs ILITEK ILITEK-TP ILITEK ILITEK-TP Mouse"
+    MatchIsTouchscreen "on"
+    MatchProduct       "ILITEK ILITEK-TP Mouse"
+    Option             "Ignore" "on"
+  ''] ;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.gutenprint pkgs.hplip pkgs.splix pkgs.brlaser pkgs.ptouch-print ];
-
-  services.avahi.enable = true;
-  services.avahi.publish.enable = false;
-  services.avahi.publish.userServices = false;
   services.printing.browsing = true;
   services.printing.listenAddresses = [ "127.0.0.1:631" ]; # Not 100% sure this is needed and you might want to restrict to the local network
   services.printing.allowFrom = [ "all" ]; # this gives access to anyone on the interface you might want to limit it see the official documentation
   services.printing.defaultShared = false; # If you want
 
-  networking.firewall.allowedUDPPorts = [ 631 ];
-  networking.firewall.allowedTCPPorts = [ 631 ];
+  services.avahi.enable = true;
+  services.avahi.publish.enable = false;
+  services.avahi.publish.userServices = false;
 
   # Enable sound.
   sound.enable = false;
@@ -117,8 +150,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "corefonts"
@@ -128,34 +159,37 @@
     enableDefaultFonts = true;
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [ 
-      corefonts
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts
-      dina-font
-      proggyfonts
-      terminus_font
-      terminus_font_ttf
-      nerdfonts
-    ];
+  #  fonts = with pkgs; [
+  #    corefonts
+  #    noto-fonts
+  #    noto-fonts-cjk
+  #    noto-fonts-emoji
+  #    liberation_ttf
+  #    fira-code
+  #    fira-code-symbols
+  #    mplus-outline-fonts
+  #    dina-font
+  #    proggyfonts
+  #    terminus_font
+  #    terminus_font_ttf
+  #    nerdfonts
+  #  ];
   };
 
   programs.bash.enableCompletion = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.lxd.enable = true;
   virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.runAsRoot = true;
+  users.groups.libvirtd.members = [ "root" "aj" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -165,21 +199,19 @@
     # enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 20022 ];
   programs.ssh.startAgent = true;
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+
+  # Firewall - enabled by default!
+  networking.firewall.enable = true;
+  networking.firewall.allowedUDPPorts = [ 631 22000 21027 ];
+  networking.firewall.allowedTCPPorts = [ 631 22000 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It is perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
@@ -187,30 +219,24 @@
 
   services.openvpn.servers = {
     wpm   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/wpm.conf ''; autoStart = false; };
-    ajssl = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/aj.sslvpn.services.net-lab.net.conf ''; autoStart = false; };
+    ajssl = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/ajssl.conf ''; autoStart = false; };
     crnl  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/crnl.conf ''; autoStart = false; };
-    kmo   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/kmo.conf ''; autoStart = false; };
+    # kmo   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/kmo.conf ''; autoStart = false; };
     # spare         = { config = '' config ''; };
   };
 
   services.davfs2.enable = true;
-#  services.autofs = {
-#    enable = true;
-#    autoMaster = let
-#      mapConf = pkgs.writeText "auto" ''
-#        nextcloud -fstype=davfs,conf=/home/aj/.config/davfs2/conf,uid=aj :https\:nextcloud.cloud-related.de/remote.php/webdav/
-#      '';
-#    in ''
-#      /home/aj/secrets-nextcloud file:${mapConf}
-#    '';
-#  };
+  services.autofs = {
+    enable = true;
+    debug = true;
+    timeout = 600;
+    autoMaster = let
+      mapConf = pkgs.writeText "auto" variables.services.autofs.mapConfLines;
+    in ''
+      /home/aj/webdav file:${mapConf}
+    '';
+  };
 
-#My davfs2.conf contains
-#
-#secrets /home/directory/.config/davfs2/secrets
-#...and the secrets file has
-#
-#https://nextcloud.domain/remote.php/webdav/ username password
   environment.sessionVariables = rec {
     PATH = [ 
       "\${HOME}/bin"
@@ -235,12 +261,48 @@
       ln -sfn /run/current-system/sw/bin/bash /bin/bash
       mkdir -p /lib64
       ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
-      # ln -sfn /nix/store/z56jcx3j1gfyk4sv7g8iaan0ssbdkhz1-glibc-2.33-56/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+      # ln -sfn /nix/store/xxxxxxxxxxxxxxxxxxxxxxx-glibc-2.33-56/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
       '';
     };
   };
 
   home-manager.useGlobalPkgs = true;
+  programs.adb.enable = true;
+  programs.kdeconnect.enable = true;
+  ## android_sdk.accept_license = true;
+
+  # Render /etc/current-system-packages
+  environment.etc."current-system-packages".text =
+  let
+  packages = builtins.map (p: "${p.name}") config.environment.systemPackages;
+  sortedUnique = builtins.sort builtins.lessThan (lib.unique packages);
+  formatted = builtins.concatStringsSep "\n" sortedUnique;
+  in
+  formatted;
+
+
+  services._3proxy = {
+    enable = true;
+    services = [
+      {
+        type = "proxy";
+          auth = [ "strong" ];
+          acl = [ {
+            rule = "allow";
+            users = [ "proxy" ];
+          }
+        ];
+        bindAddress = "127.0.0.1";
+        bindPort = 3128;
+        extraConfig = variables._3proxy.extraConfig;
+      }
+    ];
+    usersFile = "/etc/3proxy.passwd";
+  };
+
+  environment.etc."3proxy.passwd".text = variables._3proxy.passwd;
+
+  networking.extraHosts = variables.networking.extraHosts;
 
 }
 

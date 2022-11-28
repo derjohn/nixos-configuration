@@ -1,0 +1,16 @@
+{
+
+  _3proxy.extraConfig = "parent 666 socks5 192.0.0.1 1080 proxyUser ProxyPass";
+  _3proxy.passwd = ''
+      localproxyuser:CL:PlAiNtExTpAsS
+    '';
+
+  networking.extraHosts = ''
+      192.0.0.2 some.named.host
+    '';
+
+  services.autofs.mapConfLines = ''
+        nextcloud -fstype=davfs,conf=/home/aj/.config/davfs2/conf,uid=aj :https\://nextcloud.somedomain.de/remote.php/webdav/
+      '';
+
+}

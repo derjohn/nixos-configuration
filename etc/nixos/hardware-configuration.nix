@@ -13,9 +13,19 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "i915.enable_psr=0" ];
+  # boot.kernelParams = [ "i915.enable_psr=0" ];
+  boot.kernelParams = [ "i915.enable_psr=1" "i915.enable_guc_loading=1" "i915.enable_guc_submission=1" ];
+#  boot.kernelParams = [
+#    "pcie.aspm=force"
+#    "i915.enable_fbc=1"
+#    "i915.enable_rc6=7"
+#    "i915.lvds_downclock=1"
+#    "i915.enable_guc_loading=1"
+#    "i915.enable_guc_submission=1"
+#    "i915.enable_psr=0"
+#  ];
   boot.extraModprobeConfig = ''
-options snd-hda-intel model=alc288-dell-xps13
+options snd-hda-intel model=alc288-dell-xps13 sdhci
 # options snd_hda_intel power_save=1
 '';
 
@@ -52,10 +62,8 @@ options snd-hda-intel model=alc288-dell-xps13
   # /dev/mapper/vg-swap: UUID="b903769b-651f-4d5f-9688-299c986a2c64" TYPE="swap"
   swapDevices = [ { device = "/dev/disk/by-uuid/b903769b-651f-4d5f-9688-299c986a2c64"; } ];
 
-  powerManagement.cpuFreqGovernor = "powersave";
-
   hardware.bluetooth.enable = true;
-
+  hardware.sensor.iio.enable = true;
   # high-resolution display
   hardware.video.hidpi.enable = true;
   hardware.opengl = {
@@ -63,30 +71,40 @@ options snd-hda-intel model=alc288-dell-xps13
       driSupport = true;
       extraPackages = with pkgs; [
         intel-compute-runtime
-        intel-media-driver
-        vaapiIntel
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
         vaapiVdpau
         libvdpau-va-gl
+        # pkgs.mesa.drivers
       ];
   };
-
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  # environment.sessionVariables.LIBVA_DRIVER_NAME = "i965";
+  # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
+  hardware.acpilight.enable = true;
+  hardware.cpu.intel.updateMicrocode = true;
   powerManagement.enable = true;
+  powerManagement.cpuFreqGovernor = null; # will be managed by tlp
   services = {
     tlp = {
       enable = true;
       settings = {
-      # The following prevents the battery from charging fully to
-      # preserve lifetime. Run `tlp fullcharge` to temporarily force
-      # full charge.
-      # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
-        START_CHARGE_THRESH_BAT0="75";
+        # The following prevents the battery from charging fully to
+        # preserve lifetime. Run `tlp fullcharge` to temporarily force
+        # full charge.
+        # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
+        START_CHARGE_THRESH_BAT0="55";
         STOP_CHARGE_THRESH_BAT0="80";
         CPU_SCALING_GOVERNOR_ON_AC="performance";
         CPU_SCALING_GOVERNOR_ON_BAT="powersave";
+	MAX_LOST_WORK_SECS_ON_BAT="15";
         # 100 being the maximum, limit the speed of my CPU to reduce
         # heat and increase battery usage:
-        CPU_MAX_PERF_ON_AC=100;
-        CPU_MAX_PERF_ON_BAT=75;
+        CPU_MAX_PERF_ON_AC="100";
+        CPU_MAX_PERF_ON_BAT="75";
       };
     };
     upower.enable = true;
@@ -99,4 +117,5 @@ options snd-hda-intel model=alc288-dell-xps13
       wideArea = false;
     };
   };
+  services.fstrim.enable = true;
 }

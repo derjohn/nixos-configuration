@@ -17,7 +17,6 @@
     curl
     openvpn
     wireguard-tools
-    wireguard
     softether
     nextcloud-client
     keepassxc
@@ -43,7 +42,7 @@
     syncthingtray
     thunderbird
     vlc
-    vscodium
+    # vscodium
     yq
     virt-manager
     virt-top
@@ -90,7 +89,7 @@
     chromium
     tor 
     gwenview
-    digikam5
+    digikam
     gimp-with-plugins
     vlc
     konsole
@@ -145,6 +144,26 @@
     unzip
     libguestfs
     oathToolkit
-    rpl
+    # rpl
+    brightnessctl
+    apacheHttpd
+    p7zip
+    smartmontools
+    hdparm
+    libva-utils
+    intel-gpu-tools
+    libguestfs
+    multipath-tools
+    ubootTools
+    lshw
+    openfortivpn
+    openconnect
+    networkmanager-openconnect
+    openconnect_openssl
+    restic
+    autorestic
+    proxychains
+    openconnect
+    networkmanager-openconnect
   ];
 }
