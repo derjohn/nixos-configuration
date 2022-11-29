@@ -2,21 +2,39 @@
 
 with pkgs;
 let
-  unstable = import <nixos-unstable> {};
+  unstable = import <nixos-unstable> { config.android_sdk.accept_license = true; config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "android_sdk" ]; config.schuschu = "bubu"; };
+  pkgs = import <nixpkgs> { config.android_sdk.accept_license = true; config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "android_sdk" ]; };
+
   my-python-packages = python-packages: with python-packages; [
     pip
     bluepy
     bluepy-devices
-    cometblue-lite
+    # cometblue-lite
+    bsdiff4
+    protobuf
+    chardet
   ];
-  python-with-my-packages = unstable.python39.withPackages my-python-packages;
-  ferdiLatest = pkgs.ferdi.overrideAttrs (oldAttrs: rec {
-    version = "5.7.0";
+  # python-with-my-packages = unstable.python3.withPackages my-python-packages;
+  python-with-my-packages = pkgs.python3.withPackages my-python-packages;
+  ferdiumLatest = unstable.ferdium.overrideAttrs (oldAttrs: rec {
+    #version = "6.1.1-nightly.17";
+    version = "6.2.0";
     src = fetchurl {
-      url = "https://github.com/getferdi/ferdi/releases/download/v${version}/ferdi_${version}_amd64.deb";
-      sha256 = "sha256-WwtnYNjXHk80o1wMsEBoaT9j0+4TWTfWhuVpGHaZB7c=";
+      url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
+      sha256 = "sha256-lb3dvEaKgOnT5+YAJcYmro71soqkT/jpTjE0YMVMRUA=";
     };
   });
+  # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
+
+
+#  androidComposition = pkgs.androidenv.composeAndroidPackages {
+#    includeEmulator = true;
+#    emulatorVersion = "30.9.0";
+#  };
+   adoptopenjdk-hotspot-bin-15-low = pkgs.adoptopenjdk-hotspot-bin-15.overrideAttrs(oldAttrs: {  meta.priority = 15;        });  
+   adoptopenjdk-hotspot-bin-11-low = pkgs.adoptopenjdk-hotspot-bin-11.overrideAttrs(oldAttrs: {  meta.priority = 30;        });  
+   adoptopenjdk-hotspot-bin-8-low = pkgs.adoptopenjdk-hotspot-bin-8.overrideAttrs(oldAttrs: {  meta.priority = 45;        });  
+
 in
 
 {
@@ -26,7 +44,7 @@ in
   home.username = "aj";
   home.homeDirectory = "/home/aj";
 
-  home.packages = [ ferdiLatest pkgs.openjdk11 pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump pkgs.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm pkgs.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.aws-iam-authenticator pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.torbrowser pkgs.gnome-network-displays pkgs.glibc python-with-my-packages unstable.evince ];
+  home.packages = [ ferdiumLatest pkgs._3proxy pkgs.nextcloud-client pkgs.spectral pkgs.yarn2nix pkgs.nodejs pkgs.git-filter-repo pkgs.swaks unstable.vscodium unstable.ffmpeg-full pkgs.siege pkgs.krusader pkgs.filezilla pkgs.gsettings-desktop-schemas pkgs.fluent-bit pkgs.sops pkgs.rclone pkgs.drill pkgs.du-dust pkgs.viu pkgs.gron pkgs.xsv pkgs.ansible pkgs.kalendar pkgs.drawio pkgs.akonadi pkgs.unetbootin pkgs.fluxctl pkgs.xsel pkgs.dos2unix pkgs.sshpass pkgs.ripgrep pkgs.byzanz pkgs.peek pkgs.docker-compose pkgs.sshuttle pkgs.android-tools unstable.gopls unstable.dart unstable.flutter pkgs.dialog pkgs.lens pkgs.x2goclient pkgs.python39Full python39Packages.pip python39Packages.virtualenv pkgs.rpl unstable.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.pwgen pkgs.rpi-imager pkgs.go pkgs.go-langserver pkgs.pdfgrep pkgs.mediathekview pkgs.ktorrent pkgs.filezilla pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump unstable.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm unstable.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.gnome-network-displays pkgs.glibc unstable.evince pkgs.handbrake adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low ]; # python-with-my-packages androidComposition
   # nix-env -f .nix-defexpr/channels/nixos-unstable -iA signal-desktop 
 
   programs.git = {
@@ -35,6 +53,7 @@ in
     userEmail = "himself@derjohn.de";
     aliases = {
       st = "status";
+      praise = "blame";
     };
   };
 
@@ -43,17 +62,30 @@ in
     bashrcExtra = ''
       . ~/.bashrc.extra
     '';
+    initExtra = ''
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    '';
   };
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   # programs.direnv.nix-direnv.enableFlakes = true;
   programs.zsh.enable = true;
-  programs.autojump.enable = true ;
+  programs.autojump.enable = true;
+#  programs.java = {
+#    enable = true;
+#    package = pkgs.jdk8;
+#  };
 
   home.sessionVariables = {
     PYTHONPATH = "${python-with-my-packages}/${python-with-my-packages.sitePackages}";
+    # ANDROID_SDK_ROOT = "${androidComposition}/libexec/android-sdk";
+    # ANDROID_NDK_ROOT = "\${ANDROID_SDK_ROOT}/ndk-bundle";
+    JAVA_8_HOME = "${adoptopenjdk-hotspot-bin-8-low}";
+    JAVA_11_HOME = "${adoptopenjdk-hotspot-bin-11-low}";
+    JAVA_HOME = "${adoptopenjdk-hotspot-bin-11-low}";
   };
+
 
   programs.vim = {
     enable = true;
@@ -62,13 +94,7 @@ in
       set mouse=v
     '';
     settings = { number = true; };
-    plugins = [ # Defined here: pkgs/misc/vim-plugins/default.nix
-      # Standard plugins
-      "nerdtree"
-      "vim-airline"
-      # New plugins
-      "vim-better-whitespace"
-    ];
+    plugins = with pkgs.vimPlugins; [ vim-airline nerdtree vim-better-whitespace ];
   };
 
 }
