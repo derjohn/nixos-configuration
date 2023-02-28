@@ -64,12 +64,13 @@ let variables = import ./variables.nix; in
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
   i18n.extraLocaleSettings = {
     LC_MESSAGES = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    #LC_TIME = "en_US.UTF-8";
     LC_CTYPE="en_US.UTF-8";
-    #LC_TIME = "de_DE.UTF-8";
     #LC_CTYPE="de_DE.UTF-8";
+    LC_TIME = "de_DE.UTF-8";
   };
 
   console = {
@@ -206,8 +207,8 @@ let variables = import ./variables.nix; in
 
   # Firewall - enabled by default!
   networking.firewall.enable = true;
-  networking.firewall.allowedUDPPorts = [ 631 22000 21027 ];
-  networking.firewall.allowedTCPPorts = [ 631 22000 ];
+  networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 ];
+  networking.firewall.allowedTCPPorts = [ 69 631 22000 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -219,6 +220,7 @@ let variables = import ./variables.nix; in
 
   services.openvpn.servers = {
     wpm   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/wpm.conf ''; autoStart = false; };
+    rckt  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/rckt.conf ''; autoStart = false; };
     ajssl = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/ajssl.conf ''; autoStart = false; };
     crnl  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/crnl.conf ''; autoStart = false; };
     # kmo   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/kmo.conf ''; autoStart = false; };
@@ -294,6 +296,7 @@ let variables = import ./variables.nix; in
         ];
         bindAddress = "127.0.0.1";
         bindPort = 3128;
+        maxConnections = 128;
         extraConfig = variables._3proxy.extraConfig;
       }
     ];
@@ -304,5 +307,11 @@ let variables = import ./variables.nix; in
 
   networking.extraHosts = variables.networking.extraHosts;
 
+  services.atftpd.enable = true;
+  services.atftpd.extraOptions = [
+    "--bind-address 0.0.0.0"
+    "--verbose=7"
+  ];
+  services.atftpd.root = "/srv/tftp";
 }
 

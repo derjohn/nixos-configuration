@@ -165,5 +165,9 @@
     proxychains
     openconnect
     networkmanager-openconnect
+    ethtool
+    atftp
+    lynx
+    w3m
   ];
 }

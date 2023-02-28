@@ -61,6 +61,12 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
 
   # /dev/mapper/vg-swap: UUID="b903769b-651f-4d5f-9688-299c986a2c64" TYPE="swap"
   swapDevices = [ { device = "/dev/disk/by-uuid/b903769b-651f-4d5f-9688-299c986a2c64"; } ];
+  # zramctl to check compression
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 20;
+  };
 
   hardware.bluetooth.enable = true;
   hardware.sensor.iio.enable = true;
@@ -88,6 +94,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   hardware.cpu.intel.updateMicrocode = true;
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp
+  services.power-profiles-daemon.enable = false;
   services = {
     tlp = {
       enable = true;
