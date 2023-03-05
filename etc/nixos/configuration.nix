@@ -62,15 +62,19 @@ let variables = import ./variables.nix; in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
+  # Select internationalisation properties. I am kartoffel alman, but want technical stuff like system messages in english.
   i18n.defaultLocale = "en_US.UTF-8";
-  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" ];
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" "C.UTF-8/UTF-8" ];
   i18n.extraLocaleSettings = {
+    LANG = "de_DE.UTF-8";
     LC_MESSAGES = "en_US.UTF-8";
-    #LC_TIME = "en_US.UTF-8";
     LC_CTYPE="en_US.UTF-8";
-    #LC_CTYPE="de_DE.UTF-8";
     LC_TIME = "de_DE.UTF-8";
+    LC_ALL = "C.UTF-8";
+    # LC_ALL = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
   };
 
   console = {
