@@ -169,5 +169,7 @@
     atftp
     lynx
     w3m
+    libsForQt5.kmag
   ];
 }
+

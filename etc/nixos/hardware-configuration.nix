@@ -60,7 +60,8 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     };
 
   # /dev/mapper/vg-swap: UUID="b903769b-651f-4d5f-9688-299c986a2c64" TYPE="swap"
-  swapDevices = [ { device = "/dev/disk/by-uuid/b903769b-651f-4d5f-9688-299c986a2c64"; } ];
+  # swapDevices = [ { device = "/dev/disk/by-uuid/b903769b-651f-4d5f-9688-299c986a2c64"; } ];
+  swapDevices = [ ];
   # zramctl to check compression
   zramSwap = {
     enable = true;

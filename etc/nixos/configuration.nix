@@ -195,6 +195,8 @@ let variables = import ./variables.nix; in
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.runAsRoot = true;
   users.groups.libvirtd.members = [ "root" "aj" ];
+  # virtualisation.virtualbox.host.enable = true;
+  #  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -212,7 +214,7 @@ let variables = import ./variables.nix; in
   # Firewall - enabled by default!
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 ];
-  networking.firewall.allowedTCPPorts = [ 69 631 22000 ];
+  networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -256,6 +258,17 @@ let variables = import ./variables.nix; in
     nix-search = "nix-env -qaP";
   };
 
+  programs.nix-ld.enable = true;
+
+  # environment.variables = {
+  #     NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
+  #       pkgs.stdenv.cc.cc
+  #       pkgs.openssl
+  #       # ...
+  #     ];
+  #     NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+  # };
+
   system.activationScripts = {
     createSymlimks = {
       text = ''
@@ -265,8 +278,8 @@ let variables = import ./variables.nix; in
       ln -sfn /proc/self/fd/1 /dev/stdout
       ln -sfn /proc/self/fd/2 /dev/stderr
       ln -sfn /run/current-system/sw/bin/bash /bin/bash
-      mkdir -p /lib64
-      ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+      ## mkdir -p /lib64
+      ## ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
       # ln -sfn /nix/store/xxxxxxxxxxxxxxxxxxxxxxx-glibc-2.33-56/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
       '';
     };
