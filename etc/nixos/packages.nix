@@ -170,6 +170,8 @@
     lynx
     w3m
     libsForQt5.kmag
+    libguestfs
+    f2fs-tools
   ];
 }
 
