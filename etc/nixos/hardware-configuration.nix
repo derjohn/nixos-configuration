@@ -71,8 +71,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
 
   hardware.bluetooth.enable = true;
   hardware.sensor.iio.enable = true;
-  # high-resolution display
-  hardware.video.hidpi.enable = true;
+
   hardware.opengl = {
       enable = true;
       driSupport = true;

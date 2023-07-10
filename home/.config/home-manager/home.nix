@@ -17,11 +17,10 @@ let
   # python-with-my-packages = unstable.python3.withPackages my-python-packages;
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
   ferdiumLatest = unstable.ferdium.overrideAttrs (oldAttrs: rec {
-    #version = "6.1.1-nightly.17";
-    version = "6.4.0";
+    version = "6.4.1-nightly.3";
     src = fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-zIGtGmCtQn26rxDsZfPKUZAFnBaWYRhfVJdazPyZ/g0==";
+      sha256 = "sha256-EldVY4ITLDRhgh6autKcWqtB0IDWL9DZOYBOjAV+NSA=";
     };
   });
   # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
@@ -31,6 +30,7 @@ let
 #    includeEmulator = true;
 #    emulatorVersion = "30.9.0";
 #  };
+   temurin-bin-17-low = pkgs.temurin-bin-17.overrideAttrs(oldAttrs: { meta.priority = 10; });
    adoptopenjdk-hotspot-bin-15-low = pkgs.adoptopenjdk-hotspot-bin-15.overrideAttrs(oldAttrs: { meta.priority = 15; });
    adoptopenjdk-hotspot-bin-11-low = pkgs.adoptopenjdk-hotspot-bin-11.overrideAttrs(oldAttrs: { meta.priority = 30; });
    adoptopenjdk-hotspot-bin-8-low = pkgs.adoptopenjdk-hotspot-bin-8.overrideAttrs(oldAttrs: { meta.priority = 45; });
@@ -44,7 +44,7 @@ in
   home.username = "aj";
   home.homeDirectory = "/home/aj";
 
-  home.packages = [ ferdiumLatest pkgs.ghostscript pkgs.paperwork pkgs.outils pkgs.grpc-tools pkgs.grpcurl pkgs.wine pkgs.winetricks pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.mycrypto pkgs.monero-gui pkgs.zlib pkgs.gmp pkgs.openssl pkgs.socat unstable.hugo pkgs.go-ethereum pkgs.openethereum pkgs.bisq-desktop pkgs.google-drive-ocamlfuse pkgs.onlyoffice-bin pkgs.mosh pkgs.openshot-qt pkgs.kdenlive pkgs.hunspell pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de-de pkgs.usbtop pkgs.btop pkgs.rbenv pkgs.nodejs pkgs.kazam pkgs.qpdf pkgs._3proxy pkgs.nextcloud-client pkgs.spectral pkgs.yarn2nix pkgs.nodejs pkgs.git-filter-repo pkgs.swaks unstable.vscodium unstable.ffmpeg-full pkgs.siege pkgs.krusader pkgs.filezilla pkgs.gsettings-desktop-schemas pkgs.fluent-bit pkgs.sops pkgs.rclone pkgs.drill pkgs.du-dust pkgs.viu pkgs.gron pkgs.xsv pkgs.ansible pkgs.kalendar pkgs.drawio pkgs.akonadi pkgs.unetbootin pkgs.fluxctl pkgs.xsel pkgs.dos2unix pkgs.sshpass pkgs.ripgrep pkgs.byzanz pkgs.peek pkgs.docker-compose pkgs.sshuttle pkgs.android-tools unstable.dart pkgs.flutter pkgs.dialog pkgs.lens pkgs.x2goclient pkgs.python39Full python39Packages.pip python39Packages.virtualenv pkgs.rpl pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.pwgen pkgs.rpi-imager pkgs.go pkgs.gopls pkgs.golangci-lint pkgs.pdfgrep pkgs.mediathekview pkgs.ktorrent pkgs.filezilla pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump unstable.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm unstable.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.gnome-network-displays pkgs.glibc unstable.evince pkgs.handbrake adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low pkgs.postgresql_13 ]; # python-with-my-packages androidComposition
+  home.packages = [ ferdiumLatest pkgs.ghostscript pkgs.paperwork pkgs.outils pkgs.grpc-tools pkgs.grpcurl pkgs.wine pkgs.winetricks pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.mycrypto pkgs.monero-gui pkgs.zlib pkgs.gmp pkgs.openssl pkgs.socat unstable.hugo pkgs.go-ethereum pkgs.openethereum pkgs.bisq-desktop pkgs.google-drive-ocamlfuse pkgs.onlyoffice-bin pkgs.mosh pkgs.openshot-qt pkgs.kdenlive pkgs.hunspell pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de-de pkgs.usbtop pkgs.btop pkgs.rbenv pkgs.nodejs pkgs.kazam pkgs.qpdf pkgs._3proxy pkgs.nextcloud-client pkgs.spectral pkgs.yarn2nix pkgs.nodejs pkgs.git-filter-repo pkgs.swaks unstable.vscodium unstable.ffmpeg-full pkgs.siege pkgs.krusader pkgs.filezilla pkgs.gsettings-desktop-schemas pkgs.fluent-bit pkgs.sops pkgs.rclone pkgs.drill pkgs.du-dust pkgs.viu pkgs.gron pkgs.xsv pkgs.ansible pkgs.kalendar pkgs.drawio pkgs.akonadi pkgs.unetbootin pkgs.fluxctl pkgs.xsel pkgs.dos2unix pkgs.sshpass pkgs.ripgrep pkgs.byzanz pkgs.peek pkgs.docker-compose pkgs.sshuttle pkgs.android-tools unstable.dart pkgs.dialog pkgs.x2goclient pkgs.python39Full python39Packages.pip python39Packages.virtualenv pkgs.rpl pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.pwgen pkgs.rpi-imager pkgs.go pkgs.gopls pkgs.golangci-lint pkgs.pdfgrep pkgs.mediathekview pkgs.ktorrent pkgs.filezilla pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump unstable.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm unstable.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.gnome-network-displays pkgs.glibc unstable.evince pkgs.handbrake adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low temurin-bin-17-low pkgs.postgresql_13 pkgs.kphotoalbum ]; # python-with-my-packages androidComposition
   # nix-env -f .nix-defexpr/channels/nixos-unstable -iA signal-desktop
 
   home.sessionPath = [
@@ -102,6 +102,8 @@ in
     # ANDROID_NDK_ROOT = "\${ANDROID_SDK_ROOT}/ndk-bundle";
     JAVA_8_HOME = "${adoptopenjdk-hotspot-bin-8-low}";
     JAVA_11_HOME = "${adoptopenjdk-hotspot-bin-11-low}";
+    JAVA_15_HOME = "${adoptopenjdk-hotspot-bin-11-low}";
+    JAVA_17_HOME = "${temurin-bin-17-low}";
     JAVA_HOME = "${adoptopenjdk-hotspot-bin-11-low}";
     NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
       pkgs.stdenv.cc.cc

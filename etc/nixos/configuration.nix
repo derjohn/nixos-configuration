@@ -105,7 +105,7 @@ let variables = import ./variables.nix; in
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  
+
   # Configure keymap in X11
   services.xserver.layout = "de";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -155,7 +155,6 @@ let variables = import ./variables.nix; in
     #media-session.enable = true;
   };
 
-
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "corefonts"
       ];
@@ -164,21 +163,39 @@ let variables = import ./variables.nix; in
     enableDefaultFonts = true;
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-  #  fonts = with pkgs; [
-  #    corefonts
-  #    noto-fonts
-  #    noto-fonts-cjk
-  #    noto-fonts-emoji
-  #    liberation_ttf
-  #    fira-code
-  #    fira-code-symbols
-  #    mplus-outline-fonts
-  #    dina-font
-  #    proggyfonts
-  #    terminus_font
-  #    terminus_font_ttf
-  #    nerdfonts
-  #  ];
+    fonts = with pkgs; [
+      corefonts
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      # mplus-outline-fonts
+      # dina-font
+      proggyfonts
+      terminus_font
+      terminus_font_ttf
+      # nerdfonts
+    ];
+
+    fontconfig = {
+      # Fixes pixelation
+      antialias = true;
+
+      # Fixes antialiasing blur
+      hinting = {
+        enable = true;
+        style = "hintfull"; # no difference
+        autohint = true; # no difference
+      };
+
+      subpixel = {
+        # Makes it bolder
+        rgba = "rgb";
+        lcdfilter = "default"; # no difference
+      };
+    };
   };
 
   programs.bash.enableCompletion = true;
@@ -246,7 +263,7 @@ let variables = import ./variables.nix; in
   };
 
   environment.sessionVariables = rec {
-    PATH = [ 
+    PATH = [
       "\${HOME}/bin"
     ];
   };
