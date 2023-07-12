@@ -13,8 +13,10 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "i915.enable_psr=0" "i915.force_probe=9a49" ];
+  # boot.kernelParams = [ "i915.force_probe=9a49" ];
   # boot.kernelParams = [ "i915.enable_psr=0" ];
-  boot.kernelParams = [ "i915.enable_psr=1" "i915.enable_guc_loading=1" "i915.enable_guc_submission=1" ];
+  # boot.kernelParams = [ "i915.enable_psr=1" "i915.enable_guc_loading=1" "i915.enable_guc_submission=1" ];
 #  boot.kernelParams = [
 #    "pcie.aspm=force"
 #    "i915.enable_fbc=1"
@@ -72,6 +74,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   hardware.bluetooth.enable = true;
   hardware.sensor.iio.enable = true;
 
+  # nix-shell -p libva-utils --run vainfo
   hardware.opengl = {
       enable = true;
       driSupport = true;
@@ -81,13 +84,13 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
         vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
         vaapiVdpau
         libvdpau-va-gl
-        # pkgs.mesa.drivers
+        pkgs.mesa.drivers
       ];
   };
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  # environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   # environment.sessionVariables.LIBVA_DRIVER_NAME = "i965";
   # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
   hardware.acpilight.enable = true;

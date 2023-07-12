@@ -31,8 +31,10 @@ let variables = import ./variables.nix; in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" "aarch64-linux" ]; # for docker buildx
 
   # hardware.enableAllFirmware = true;
   # nixpkgs.config.allowUnfree = true;
@@ -105,6 +107,7 @@ let variables = import ./variables.nix; in
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.defaultSession = "plasmawayland";
 
   # Configure keymap in X11
   services.xserver.layout = "de";

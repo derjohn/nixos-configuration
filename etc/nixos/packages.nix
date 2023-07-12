@@ -172,6 +172,7 @@
     libsForQt5.kmag
     libguestfs
     f2fs-tools
+    docker-buildx
   ];
 }
 
