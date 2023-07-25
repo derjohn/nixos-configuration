@@ -81,16 +81,16 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
       extraPackages = with pkgs; [
         intel-compute-runtime
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        vaapiVdpau
-        libvdpau-va-gl
+        # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        # vaapiVdpau # this is for nvidia only
+        # libvdpau-va-gl # some legacy , see https://discourse.nixos.org/t/failed-vaapi-init/23317/2
         pkgs.mesa.drivers
       ];
   };
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  # environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   # environment.sessionVariables.LIBVA_DRIVER_NAME = "i965";
   # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
   hardware.acpilight.enable = true;

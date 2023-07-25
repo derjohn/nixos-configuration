@@ -11,8 +11,6 @@
     wpa_supplicant
     vim
     wget
-    firefox
-    chromium
     tcpdump
     curl
     openvpn
