@@ -171,6 +171,7 @@
     libguestfs
     f2fs-tools
     docker-buildx
+    psmisc
   ];
 }
 

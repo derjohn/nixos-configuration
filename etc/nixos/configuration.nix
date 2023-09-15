@@ -4,7 +4,10 @@
 
 { config, pkgs, lib, ... }:
 
-let variables = import ./variables.nix; in
+let
+  variables       = import ./variables.nix;
+  nixos-unstable  = import <nixos-unstable> { };
+in
 
 {
   imports =
@@ -136,9 +139,15 @@ let variables = import ./variables.nix; in
   services.printing.allowFrom = [ "all" ]; # this gives access to anyone on the interface you might want to limit it see the official documentation
   services.printing.defaultShared = false; # If you want
 
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.hplip nixos-unstable.utsushi];
+  # unfree:pkgs.hplipWithPlugin pkgs.epkowa
+  services.udev.packages = [ nixos-unstable.utsushi ];
+
   services.avahi.enable = true;
   services.avahi.publish.enable = false;
   services.avahi.publish.userServices = false;
+  services.avahi.nssmdns = true;
 
   # Enable sound.
   sound.enable = false;
@@ -206,7 +215,7 @@ let variables = import ./variables.nix; in
   # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
   };
 

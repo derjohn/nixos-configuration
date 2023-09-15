@@ -16,13 +16,13 @@ let
   ];
   # python-with-my-packages = unstable.python3.withPackages my-python-packages;
   python-with-my-packages = pkgs.python3.withPackages my-python-packages;
-  ferdiumLatest = unstable.ferdium.overrideAttrs (oldAttrs: rec {
-    version = "6.4.1-nightly.11";
-    src = fetchurl {
-      url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-89rPdbUa04oeK/b2IaKNkWNvSfpZWd/5vjErLcnBD8U=";
-    };
-  });
+  # ferdiumLatest = unstable.ferdium.overrideAttrs (oldAttrs: rec {
+  #   version = "6.4.1";
+  #   src = fetchurl {
+  #     url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
+  #     sha256 = "sha256-Oai5z6/CE/R2rH9LBVhY7eaKpF8eIIYI+3vjJPbq+rw=";
+  #   };
+  # });
   # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
 
 
@@ -44,7 +44,7 @@ in
   home.username = "aj";
   home.homeDirectory = "/home/aj";
 
-  home.packages = [ ferdiumLatest pkgs.ghostscript pkgs.paperwork pkgs.outils pkgs.grpc-tools pkgs.grpcurl pkgs.wine pkgs.winetricks pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.mycrypto pkgs.monero-gui pkgs.zlib pkgs.gmp pkgs.openssl pkgs.socat unstable.hugo pkgs.go-ethereum pkgs.openethereum pkgs.bisq-desktop pkgs.google-drive-ocamlfuse pkgs.onlyoffice-bin pkgs.mosh pkgs.openshot-qt pkgs.kdenlive pkgs.hunspell pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de-de pkgs.usbtop pkgs.btop pkgs.rbenv pkgs.nodejs pkgs.kazam pkgs.qpdf pkgs._3proxy pkgs.nextcloud-client pkgs.spectral pkgs.yarn2nix pkgs.nodejs pkgs.git-filter-repo pkgs.swaks unstable.vscodium unstable.ffmpeg-full pkgs.siege pkgs.krusader pkgs.filezilla pkgs.gsettings-desktop-schemas pkgs.fluent-bit pkgs.sops pkgs.rclone pkgs.drill pkgs.du-dust pkgs.viu pkgs.gron pkgs.xsv pkgs.ansible pkgs.kalendar pkgs.drawio pkgs.akonadi pkgs.unetbootin pkgs.fluxctl pkgs.xsel pkgs.dos2unix pkgs.sshpass pkgs.ripgrep pkgs.byzanz pkgs.peek pkgs.docker-compose pkgs.sshuttle pkgs.android-tools unstable.dart pkgs.dialog pkgs.x2goclient pkgs.python39Full python39Packages.pip python39Packages.virtualenv pkgs.rpl pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.pwgen pkgs.rpi-imager pkgs.go pkgs.gopls pkgs.golangci-lint pkgs.pdfgrep pkgs.mediathekview pkgs.ktorrent pkgs.filezilla pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump unstable.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm unstable.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.gnome-network-displays pkgs.glibc unstable.evince pkgs.handbrake adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low temurin-bin-17-low pkgs.postgresql_13 pkgs.kphotoalbum ]; # python-with-my-packages androidComposition
+  home.packages = [ unstable.ferdium pkgs.adoptopenjdk-icedtea-web pkgs.appimage-run pkgs.atom pkgs.ghostscript pkgs.paperwork pkgs.outils pkgs.grpc-tools pkgs.grpcurl pkgs.wine pkgs.winetricks pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.mycrypto pkgs.monero-gui pkgs.zlib pkgs.gmp pkgs.openssl pkgs.socat unstable.hugo pkgs.go-ethereum pkgs.openethereum pkgs.bisq-desktop pkgs.google-drive-ocamlfuse pkgs.onlyoffice-bin pkgs.mosh pkgs.openshot-qt pkgs.kdenlive pkgs.hunspell pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de-de pkgs.usbtop pkgs.btop pkgs.rbenv pkgs.nodejs pkgs.kazam pkgs.qpdf pkgs._3proxy pkgs.nextcloud-client pkgs.spectral pkgs.yarn2nix pkgs.nodejs pkgs.git-filter-repo pkgs.swaks unstable.vscodium unstable.ffmpeg-full pkgs.siege pkgs.krusader pkgs.filezilla pkgs.gsettings-desktop-schemas pkgs.fluent-bit pkgs.sops pkgs.rclone pkgs.drill pkgs.du-dust pkgs.viu pkgs.gron pkgs.xsv pkgs.ansible pkgs.kalendar pkgs.drawio pkgs.akonadi pkgs.unetbootin pkgs.fluxctl pkgs.xsel pkgs.dos2unix pkgs.sshpass pkgs.ripgrep pkgs.byzanz pkgs.peek pkgs.docker-compose pkgs.sshuttle pkgs.android-tools unstable.dart pkgs.dialog pkgs.x2goclient pkgs.python39Full python39Packages.pip python39Packages.virtualenv pkgs.rpl pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.pwgen pkgs.rpi-imager pkgs.go pkgs.gopls pkgs.golangci-lint pkgs.pdfgrep pkgs.mediathekview pkgs.ktorrent pkgs.filezilla pkgs.hugs pkgs.pavucontrol pkgs.pdsh pkgs.autojump unstable.jameica pkgs.freecad pkgs.sipcalc pkgs.glibc pkgs.kcalc pkgs.asdf-vm unstable.awscli2 pkgs.oathToolkit pkgs.aws-mfa pkgs.gsctl pkgs.git-crypt pkgs.zip pkgs.signal-desktop pkgs.ruby pkgs.gnome-network-displays pkgs.glibc unstable.evince pkgs.handbrake adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low temurin-bin-17-low pkgs.postgresql_13 pkgs.kphotoalbum(google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin]) ]; # python-with-my-packages androidComposition
   # nix-env -f .nix-defexpr/channels/nixos-unstable -iA signal-desktop
 
   home.sessionPath = [
