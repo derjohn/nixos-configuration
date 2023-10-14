@@ -75,6 +75,8 @@
     kgpg
     pinentry-qt
     kdeplasma-addons
+    plasma5Packages.dolphin-plugins
+    plasma5Packages.plasma-thunderbolt
     spectacle
     bluedevil
     kate
@@ -92,7 +94,6 @@
     vlc
     konsole
     dolphin
-    plasma5Packages.dolphin-plugins
     kwalletcli
     parted
     fatresize
@@ -172,6 +173,8 @@
     f2fs-tools
     docker-buildx
     psmisc
+    bolt
+    dislocker
   ];
 }
 

@@ -101,6 +101,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp
   services.power-profiles-daemon.enable = false;
+  services.hardware.bolt.enable = true;
   services = {
     tlp = {
       enable = true;
