@@ -172,10 +172,10 @@ in
       ];
 
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       corefonts
       noto-fonts
       noto-fonts-cjk
@@ -198,7 +198,7 @@ in
       # Fixes antialiasing blur
       hinting = {
         enable = true;
-        style = "hintfull"; # no difference
+        style = "full"; # no difference
         autohint = true; # no difference
       };
 

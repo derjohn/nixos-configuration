@@ -175,6 +175,10 @@
     psmisc
     bolt
     dislocker
+    bpfmon
+    bpftool
+    bpftools
+    bpftrace
   ];
 }
 
