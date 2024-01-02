@@ -88,6 +88,7 @@ in
     font = "latarcyrheb-sun32";
     keyMap = "de";
   };
+  services.fprintd.enable = lib.mkForce false; # unfree binary !
 
   # See: https://github.com/NixOS/nixpkgs/blob/nixos-20.09/nixos/modules/security/sudo.nix
   security.sudo.extraConfig = ''
@@ -161,10 +162,10 @@ in
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    wireplumber = {
+      enable = true;
+      package = pkgs.wireplumber;
+    };
   };
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [

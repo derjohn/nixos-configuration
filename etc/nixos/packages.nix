@@ -179,6 +179,7 @@
     bpftool
     bpftools
     bpftrace
+    miraclecast
   ];
 }
 
