@@ -180,6 +180,7 @@
     bpftools
     bpftrace
     miraclecast
+    memtester
   ];
 }
 
