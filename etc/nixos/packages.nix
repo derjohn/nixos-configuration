@@ -181,6 +181,11 @@
     bpftrace
     miraclecast
     memtester
+    nvme-cli
+    libinput
+    xlibinput-calibrator
+    libinput
+    libinput-gestures
   ];
 }
 

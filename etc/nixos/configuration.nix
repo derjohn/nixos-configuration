@@ -150,6 +150,8 @@ in
   services.avahi.publish.userServices = false;
   services.avahi.nssmdns = true;
 
+  services.flatpak.enable = true;
+
   # Enable sound.
   sound.enable = false;
   hardware.pulseaudio.enable = false;
@@ -217,6 +219,12 @@ in
   users.users.aj = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
+  };
+
+  users.users.ajzwo = {
+    isNormalUser = true;
+    extraGroups = [ "networkmanager" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
   };
 
