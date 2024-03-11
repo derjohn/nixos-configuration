@@ -11,21 +11,21 @@
   # boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [ "kvm-intel" "ftdi_sio" ];
+  # boot.extraModulePackages = [ ];
   # boot.kernelParams = [ "i915.enable_psr=0" "i915.force_probe=9a49" ]; ## disabled 6.7.2 02/2024
   # boot.kernelParams = [ "i915.force_probe=9a49" ];
   # boot.kernelParams = [ "i915.enable_psr=0" ];
   # boot.kernelParams = [ "i915.enable_psr=1" "i915.enable_guc_loading=1" "i915.enable_guc_submission=1" ];
-#  boot.kernelParams = [
-#    "pcie.aspm=force"
-#    "i915.enable_fbc=1"
-#    "i915.enable_rc6=7"
-#    "i915.lvds_downclock=1"
-#    "i915.enable_guc_loading=1"
-#    "i915.enable_guc_submission=1"
-#    "i915.enable_psr=0"
-#  ];
+  #  boot.kernelParams = [
+  #    "pcie.aspm=force"
+  #    "i915.enable_fbc=1"
+  #    "i915.enable_rc6=7"
+  #    "i915.lvds_downclock=1"
+  #    "i915.enable_guc_loading=1"
+  #    "i915.enable_guc_submission=1"
+  #    "i915.enable_psr=0"
+  #  ];
   boot.extraModprobeConfig = ''
 options snd-hda-intel model=alc288-dell-xps13 sdhci
 # options snd_hda_intel power_save=1
