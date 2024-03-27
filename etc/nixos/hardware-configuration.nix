@@ -132,4 +132,20 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     };
   };
   services.fstrim.enable = true;
+  services.udev.extraRules = ''
+    # Flexbox rules
+    #V2 Legacy
+    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="5750",MODE="0666"
+    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="5750",MODE="0666"
+    #V2
+    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="[aA]0[eE]7",MODE="0666"
+    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="[aA]0[eE]7",MODE="0666"
+    #V3
+    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="[aA]0[eE]8",MODE="0666"
+    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="[aA]0[eE]8",MODE="0666"
+    #V4  16D0 0B1A
+    SUBSYSTEM=="usb",ATTR{idVendor}=="16[dD]0",ATTR{idProduct}=="0[bB]1[aA]",MODE="0666"
+    KERNEL=="hidraw*",ATTRS{idVendor}=="16[dD]0",ATTRS{idProduct}=="0[bB]1[aA]",MODE="0666"
+  '';
 }
+

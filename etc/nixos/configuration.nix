@@ -102,6 +102,7 @@ in
         { command = "/run/current-system/sw/bin/systemctl status openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl stop openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl start openvpn*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl restart openvpn*"; options = [ "NOPASSWD" ]; }
       ];
     }
   ];

@@ -186,6 +186,7 @@
     xlibinput-calibrator
     libinput
     libinput-gestures
+    appimage-run
   ];
 }
 
