@@ -1,0 +1,30 @@
+{
+  networking.wg-quick.interfaces.crnl-vrz001 = {
+    autostart  = false; # systemctl start wg-quick-crnl-vrz001.service
+    address = ["172.20.249.42/32"];
+    privateKeyFile = "/home/aj/.shared-configs/etc/wireguard/crnl-vrz001-private.key";
+    mtu = 1400;
+    peers = [
+      {
+        allowedIPs = [ "192.168.11.0/24" "192.168.102.0/24" "192.168.105.0/24" "172.20.249.0/24" ];
+        publicKey = "xxxxxx";
+        endpoint = "80.xxxxx:51820";
+        persistentKeepalive = 10;
+      }
+    ];
+  };
+
+  security.sudo.extraRules= [
+    {  groups = [ "wheel" ];
+      commands = [
+        { command = "/run/current-system/sw/bin/systemctl status wg-quick*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl stop wg-quick*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl start wg-quick*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/systemctl restart wg-quick*"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/wg show"; options = [ "NOPASSWD" ]; }
+      ];
+    }
+  ];
+
+}
+

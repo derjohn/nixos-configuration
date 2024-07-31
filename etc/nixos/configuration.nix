@@ -17,6 +17,7 @@ in
       ./packages.nix
       ./k3s.nix
       <home-manager/nixos>
+      ./vpn.nix
       # ./ssh.nix
       # ./etc.nix
     ];
@@ -111,16 +112,16 @@ in
   services.xserver.enable = true;
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.displayManager.defaultSession = "plasmawayland";
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "plasmax11";
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "de";
+  services.xserver.xkb.layout = "de";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   services.xserver.inputClassSections = [ ''
     Identifier         "disable secondary touchscreen inputs ILITEK ILITEK-TP"
     MatchIsTouchscreen "on"
@@ -146,12 +147,13 @@ in
   hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.hplip nixos-unstable.utsushi];
   # unfree:pkgs.hplipWithPlugin pkgs.epkowa
   services.udev.packages = [ nixos-unstable.utsushi ];
-
-  services.avahi.enable = true;
-  services.avahi.publish.enable = false;
-  services.avahi.publish.userServices = false;
-  services.avahi.nssmdns = true;
-
+  services.avahi = {
+    enable   = true;
+    nssmdns4 = true;
+    wideArea = false;
+    publish.enable = false;
+    publish.userServices = false;
+  };
   services.flatpak.enable = true;
 
   # Enable sound.
@@ -231,6 +233,14 @@ in
   };
 
   virtualisation.docker.enable = true;
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      # dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
   virtualisation.lxd.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.runAsRoot = true;
@@ -249,12 +259,19 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.ports = [ 20022 ];
+  services.openssh.settings.X11Forwarding = true;
+  programs.ssh.setXAuthLocation = true;
   programs.ssh.startAgent = true;
 
   # Firewall - enabled by default!
   networking.firewall.enable = true;
-  networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 ];
+  networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 51820 51821 51822 ];
   networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 ];
+  networking.firewall.checkReversePath = "loose";
+  networking.firewall.logReversePathDrops = true;
+  # networking.nat.enable = true;
+  # networking.nat.externalInterface = "wlp0s20f3";
+  # networking.nat.internalInterfaces = [ "wg*" "virbr*" "docker*" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -262,7 +279,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.05"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   services.openvpn.servers = {
     wpm   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/wpm.conf ''; autoStart = false; };

@@ -125,11 +125,6 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     dbus.packages = with pkgs; [
       miraclecast
     ];
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      wideArea = false;
-    };
   };
   services.fstrim.enable = true;
   services.udev.extraRules = ''

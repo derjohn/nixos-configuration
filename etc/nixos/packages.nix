@@ -18,8 +18,6 @@
     softether
     nextcloud-client
     keepassxc
-    libreoffice-qt
-    libreoffice-fresh
     git
     openssl
     netcat-gnu
@@ -187,6 +185,11 @@
     libinput
     libinput-gestures
     appimage-run
+    lsof
+    dive
+    podman-tui
+    docker-compose
+    podman-compose
   ];
 }
 

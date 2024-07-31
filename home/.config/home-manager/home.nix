@@ -17,10 +17,10 @@ let
   ### python-with-my-packages = unstable.python3.withPackages my-python-packages;
   # python-with-my-packages = pkgs.python3.withPackages my-python-packages;
   ferdiumLatest = pkgs.ferdium.overrideAttrs (oldAttrs: rec {
-    version = "6.7.2";
+    version = "6.7.5";
     src = fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-RH8iHqJ0Nd3wkXmv/ZGX5JeWtxyJtVLVb0tz6tnkjrw=";
+      sha256 = "sha256-PhWYHGRSX9wpPAlfA/UN2nmr++IWbeeEadgU6WAXaTQ=";
     };
   });
   # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
@@ -44,12 +44,15 @@ in
   home.username = "aj";
   home.homeDirectory = "/home/aj";
 
-  home.packages = [ pkgs._3proxy pkgs.adoptopenjdk-icedtea-web pkgs.akonadi pkgs.android-tools pkgs.ansible pkgs.appimage-run pkgs.asdf-vm pkgs.autojump pkgs.avrdude pkgs.aws-mfa pkgs.awscli2 pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.bisq-desktop pkgs.brave pkgs.bruno pkgs.btop pkgs.byzanz pkgs.dart pkgs.dialog pkgs.docker-compose pkgs.dos2unix pkgs.drawio pkgs.drill pkgs.du-dust pkgs.ebusd pkgs.evince pkgs.ffmpeg-full pkgs.filezilla pkgs.firebase-tools pkgs.fluent-bit pkgs.fluxctl pkgs.freecad pkgs.freerdp pkgs.ghostscript pkgs.git-crypt pkgs.git-filter-repo pkgs.glibc pkgs.gmp pkgs.gnome-network-displays pkgs.go-ethereum pkgs.google-drive-ocamlfuse pkgs.gron pkgs.grpc-gateway pkgs.grpc-tools pkgs.grpcurl pkgs.gsctl pkgs.gsettings-desktop-schemas pkgs.handbrake pkgs.hugo pkgs.hidapi pkgs.hugs pkgs.hunspell pkgs.hunspellDicts.de-de pkgs.hunspellDicts.en-us pkgs.imagemagick pkgs.insomnia pkgs.jameica pkgs.kalendar pkgs.kazam pkgs.kcalc pkgs.kdenlive pkgs.kphotoalbum pkgs.krusader pkgs.ktorrent pkgs.lapce pkgs.mediathekview pkgs.monero-gui pkgs.mosh pkgs.mupdf pkgs.mycrypto pkgs.nextcloud-client pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.nodejs pkgs.oathToolkit pkgs.ollama pkgs.onlyoffice-bin pkgs.openethereum pkgs.openshot-qt pkgs.openssl pkgs.outils pkgs.paperwork pkgs.pavucontrol pkgs.pdfarranger pkgs.pdfgrep pkgs.pdfsam-basic pkgs.pdsh pkgs.peek pkgs.pinta pkgs.pkgsCross.avr.buildPackages.gcc pkgs.platformio pkgs.postgresql_13 pkgs.proto-contrib pkgs.protoc-gen-go pkgs.protoc-gen-go-grpc pkgs.protoc-gen-validate pkgs.pssh pkgs.pwgen pkgs.python39Full pkgs.qpdf pkgs.rbenv pkgs.rclone pkgs.ripgrep pkgs.rpi-imager pkgs.rpl pkgs.rpmextract pkgs.ruby unstable.rustdesk-flutter pkgs.siege pkgs.signal-desktop pkgs.sipcalc pkgs.socat pkgs.sops pkgs.spectral pkgs.sshpass pkgs.sshuttle pkgs.swaks pkgs.unetbootin pkgs.untrunc pkgs.usbtop pkgs.viu pkgs.vscodium pkgs.wine pkgs.winetricks pkgs.x2goclient pkgs.xsel pkgs.xsv pkgs.yarn2nix pkgs.zip pkgs.zlib ferdiumLatest python39Packages.pip python39Packages.virtualenv temurin-bin-17-low adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin]) ];
+  home.packages = [ pkgs._3proxy pkgs.adoptopenjdk-icedtea-web pkgs.akonadi pkgs.android-tools pkgs.ansible pkgs.appimage-run pkgs.asdf-vm pkgs.autojump pkgs.avrdude pkgs.aws-mfa pkgs.awscli2 pkgs.azure-cli pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy pkgs.bisq-desktop pkgs.brave unstable.bruno pkgs.btop pkgs.byzanz pkgs.dart pkgs.delve pkgs.dialog pkgs.docker-compose pkgs.dos2unix pkgs.drawio pkgs.drill pkgs.du-dust pkgs.ebusd pkgs.envsubst pkgs.evince pkgs.ffmpeg-full pkgs.filezilla pkgs.firebase-tools pkgs.fluent-bit pkgs.fluxctl pkgs.freecad pkgs.freerdp pkgs.ghostscript pkgs.git-crypt pkgs.git-filter-repo pkgs.glibc pkgs.gmp pkgs.gnome-network-displays pkgs.go-ethereum pkgs.google-drive-ocamlfuse pkgs.gron pkgs.grpc-gateway pkgs.grpc-tools pkgs.grpcurl pkgs.gsctl pkgs.gsettings-desktop-schemas pkgs.handbrake pkgs.hugo pkgs.hidapi pkgs.hugs pkgs.hunspell pkgs.hunspellDicts.de-de pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de_DE pkgs.hyphen pkgs.imagemagick pkgs.insomnia pkgs.ipmitool pkgs.jameica pkgs.kalendar pkgs.kazam pkgs.kcalc pkgs.kdenlive pkgs.kphotoalbum pkgs.krusader pkgs.kteatime pkgs.ktorrent pkgs.lapce pkgs.libreoffice-fresh pkgs.mediathekview pkgs.monero-gui pkgs.mosh pkgs.mupdf pkgs.mycrypto pkgs.nextcloud-client pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.nodejs pkgs.oathToolkit pkgs.ollama pkgs.onlyoffice-bin pkgs.openshot-qt pkgs.openssl pkgs.outils pkgs.paperwork pkgs.pavucontrol pkgs.pdfarranger pkgs.pdfgrep pkgs.pdfsam-basic pkgs.pdsh pkgs.peek pkgs.pinta pkgs.pkgsCross.avr.buildPackages.gcc pkgs.platformio pkgs.postgresql_13 pkgs.proto-contrib pkgs.protoc-gen-go pkgs.protoc-gen-go-grpc pkgs.protoc-gen-validate pkgs.pssh pkgs.pwgen pkgs.python39Full pkgs.qpdf pkgs.rbenv pkgs.rclone pkgs.regclient pkgs.regsync pkgs.ripgrep pkgs.rpi-imager pkgs.rpl pkgs.rpmextract pkgs.ruby unstable.rustdesk-flutter pkgs.siege pkgs.signal-desktop pkgs.sipcalc pkgs.socat pkgs.sops pkgs.spectral pkgs.sshpass pkgs.sshuttle pkgs.swaks pkgs.unetbootin pkgs.untrunc pkgs.usbtop pkgs.viu pkgs.vscodium pkgs.wine pkgs.winetricks pkgs.x2goclient pkgs.xsel pkgs.xsv pkgs.yarn2nix pkgs.zip pkgs.zlib ferdiumLatest python39Packages.pip python39Packages.virtualenv temurin-bin-17-low adoptopenjdk-hotspot-bin-8-low adoptopenjdk-hotspot-bin-11-low adoptopenjdk-hotspot-bin-15-low (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin]) ];
+  # unstable.hoppscotch
   # nix-env -f .nix-defexpr/channels/nixos-unstable -iA signal-desktop
   home.sessionPath = [
     "$HOME/bin"
     "$HOME/.npm-global/bin"
   ];
+
+  programs.command-not-found.enable = true;
 
   programs.obs-studio = {
     enable = true;
