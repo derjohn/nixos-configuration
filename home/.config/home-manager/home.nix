@@ -17,10 +17,10 @@ let
   ### python-with-my-packages = unstable.python3.withPackages my-python-packages;
   # python-with-my-packages = pkgs.python3.withPackages my-python-packages;
   ferdiumLatest = pkgs.ferdium.overrideAttrs (oldAttrs: rec {
-    version = "6.7.5";
+    version = "6.7.6";
     src = fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-PhWYHGRSX9wpPAlfA/UN2nmr++IWbeeEadgU6WAXaTQ=";
+      sha256 = "sha256-gx8tDGb2yjwexChZGJ9RdVbgseDByFeW2ZR1RebjlO4=";
     };
   });
   # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
