@@ -36,7 +36,6 @@
     krusader
     syncthing
     syncthingtray
-    thunderbird
     vlc
     # vscodium
     yq

@@ -281,6 +281,11 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
+
   services.openvpn.servers = {
     wpm   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/wpm.conf ''; autoStart = false; };
     rckt  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/rckt.conf ''; autoStart = false; };
