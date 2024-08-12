@@ -12,7 +12,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" "ftdi_sio" ];
-  # boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
   # boot.kernelParams = [ "i915.enable_psr=0" "i915.force_probe=9a49" ]; ## disabled 6.7.2 02/2024
   # boot.kernelParams = [ "i915.force_probe=9a49" ];
   # boot.kernelParams = [ "i915.enable_psr=0" ];
