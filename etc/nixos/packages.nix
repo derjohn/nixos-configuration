@@ -17,7 +17,6 @@
     wireguard-tools
     softether
     nextcloud-client
-    keepassxc
     git
     openssl
     netcat-gnu
@@ -189,6 +188,10 @@
     podman-tui
     docker-compose
     podman-compose
+    lm_sensors
+    vulkan-tools
+    glxinfo
+    gpu-viewer
   ];
 }
 

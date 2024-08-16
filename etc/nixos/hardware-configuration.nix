@@ -11,8 +11,9 @@
   # boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-intel" "ftdi_sio" ];
+  boot.kernelModules = [ "kvm-intel" "ftdi_sio" "coretemp" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
+  # boot.kernelParams = [ "i915.force_probe=9a49" ]; ## force only needed from Gen12 onwards (I have Gen 11)
   # boot.kernelParams = [ "i915.enable_psr=0" "i915.force_probe=9a49" ]; ## disabled 6.7.2 02/2024
   # boot.kernelParams = [ "i915.force_probe=9a49" ];
   # boot.kernelParams = [ "i915.enable_psr=0" ];
@@ -76,28 +77,33 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
 
   # nix-shell -p libva-utils --run vainfo
   hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true; # for wine with openGL
-      extraPackages = with pkgs; [
-        intel-compute-runtime
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        # vaapiVdpau # this is for nvidia only
-        # libvdpau-va-gl # some legacy , see https://discourse.nixos.org/t/failed-vaapi-init/23317/2
-        # libGL
-        pkgs.mesa.drivers
-     ];
-     setLdLibraryPath = true;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true; # for wine with openGL
+    setLdLibraryPath = true;
+    extraPackages = with pkgs; [
+      onevpl-intel-gpu
+      # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05
+      pkgs.mesa.drivers
+    ];
+    ## extraPackages = with pkgs; [
+    ##   intel-compute-runtime
+    ##   intel-media-driver # LIBVA_DRIVER_NAME=iHD
+    ##   # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    ##   # vaapiVdpau # this is for nvidia only
+    ##   # libvdpau-va-gl # some legacy , see https://discourse.nixos.org/t/failed-vaapi-init/23317/2
+    ##   # libGL
+    ##   pkgs.mesa.drivers
+    ## ];
+
   };
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  # };
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  # environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   # environment.sessionVariables.LIBVA_DRIVER_NAME = "i965";
   # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
   hardware.acpilight.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
+  services.thermald.enable = true;
+  hardware.fancontrol.enable = false;
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp
   services.power-profiles-daemon.enable = false;
