@@ -39,8 +39,10 @@ in
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
   boot.binfmt.emulatedSystems = [ "armv7l-linux" "aarch64-linux" ]; # for docker buildx
+  hardware.enableRedistributableFirmware = true;
 
   # hardware.enableAllFirmware = true;
+  # hardware.enableRedistributableFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
  services.journald.extraConfig = ''
@@ -250,6 +252,7 @@ in
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+  programs.firejail.enable = true;
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
