@@ -192,6 +192,7 @@
     vulkan-tools
     glxinfo
     gpu-viewer
+    duplicati
   ];
 }
 

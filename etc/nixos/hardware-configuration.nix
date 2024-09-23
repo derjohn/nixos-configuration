@@ -102,7 +102,11 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
   hardware.acpilight.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
-  services.thermald.enable = true;
+  services.thermald = {
+    debug = true;
+    enable = true;
+    configFile = "/etc/nixos/thermal-conf-handcrafted.xml";
+  };
   hardware.fancontrol.enable = false;
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp
