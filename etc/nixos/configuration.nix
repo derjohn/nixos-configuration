@@ -268,8 +268,8 @@ in
 
   # Firewall - enabled by default!
   networking.firewall.enable = true;
-  networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 51820 51821 51822 ];
-  networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 ];
+  networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 51820 51821 51822 53317 ];
+  networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 53317 ];
   networking.firewall.checkReversePath = "loose";
   networking.firewall.logReversePathDrops = true;
   # networking.nat.enable = true;
