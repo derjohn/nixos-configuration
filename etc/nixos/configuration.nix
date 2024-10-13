@@ -182,8 +182,8 @@ in
 
   fonts = {
     enableDefaultPackages = true;
-    fontDir.enable = true;
     enableGhostscriptFonts = true;
+    fontDir.enable = true;
     packages = with pkgs; [
       corefonts
       noto-fonts
@@ -192,12 +192,10 @@ in
       liberation_ttf
       fira-code
       fira-code-symbols
-      # mplus-outline-fonts
-      # dina-font
       proggyfonts
       terminus_font
       terminus_font_ttf
-      # nerdfonts
+      (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
     ];
 
     fontconfig = {
