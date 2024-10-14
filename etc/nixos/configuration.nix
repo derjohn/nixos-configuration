@@ -193,12 +193,22 @@ in
       fira-code
       fira-code-symbols
       proggyfonts
+      source-code-pro
+      twitter-color-emoji
       terminus_font
       terminus_font_ttf
+      gentium
+      cantarell-fonts
       (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
     ];
 
     fontconfig = {
+      defaultFonts = {
+        serif = [ "Gentium Plus" ];
+        sansSerif = [ "Cantarell" ];
+        monospace = [ "Source Code Pro" ];
+        emoji = [ "Twitter Color Emoji" ];
+      };
       # Fixes pixelation
       antialias = true;
 
