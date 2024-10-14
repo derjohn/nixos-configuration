@@ -52,6 +52,8 @@ in
     "$HOME/.npm-global/bin"
   ];
 
+  xdg.enable = true;
+
   programs.command-not-found.enable = true;
 
   programs.obs-studio = {
