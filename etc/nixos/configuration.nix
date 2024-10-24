@@ -158,13 +158,19 @@ in
   };
   services.flatpak.enable = true;
 
+  security.rtkit.enable = true;
   # Enable sound.
   sound.enable = false;
   hardware.pulseaudio.enable = false;
-
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    extraConfig.pipewire = {
+      "99-switch-on-connect" = ''{
+        context.modules = {
+        { name = libpipewire-module-switch-on-connect }
+      }
+      '';
+    };
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
