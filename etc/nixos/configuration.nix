@@ -238,7 +238,7 @@ in
   # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
+    extraGroups = [ "wheel" "networkmanager" "podman" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
   };
 
@@ -248,12 +248,12 @@ in
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
   };
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
       enable = true;
-      # dockerCompat = true;
+      dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
   };

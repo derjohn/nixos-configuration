@@ -71,8 +71,8 @@
     kgpg
     pinentry-qt
     kdeplasma-addons
-    plasma5Packages.dolphin-plugins
-    plasma5Packages.plasma-thunderbolt
+    kdePackages.dolphin-plugins
+    plasma-thunderbolt
     spectacle
     bluedevil
     kate
@@ -88,8 +88,7 @@
     gimp-with-plugins
     vlc
     konsole
-    dolphin
-    kwalletcli
+    kdePackages.dolphin
     parted
     fatresize
     nmap
@@ -163,7 +162,7 @@
     atftp
     lynx
     w3m
-    libsForQt5.kmag
+    kmag
     libguestfs
     f2fs-tools
     docker-buildx
