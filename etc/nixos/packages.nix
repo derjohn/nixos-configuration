@@ -74,7 +74,7 @@
     kdePackages.dolphin-plugins
     plasma-thunderbolt
     spectacle
-    bluedevil
+    # bluedevil
     kate
     ktorrent
     yakuake
