@@ -73,14 +73,15 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   };
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = false;
   hardware.sensor.iio.enable = true;
 
   # nix-shell -p libva-utils --run vainfo
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true; # for wine with openGL
-    setLdLibraryPath = true;
+    # driSupport = true;
+    # driSupport32Bit = true; # for wine with openGL
+    # setLdLibraryPath = true;
     extraPackages = with pkgs; [
       onevpl-intel-gpu
       # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05
@@ -132,6 +133,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
       };
     };
     upower.enable = true;
+    # upower -i $(upower -e | grep 'BAT'
     dbus.packages = with pkgs; [
       miraclecast
     ];

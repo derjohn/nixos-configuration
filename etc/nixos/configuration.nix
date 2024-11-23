@@ -160,7 +160,7 @@ in
 
   security.rtkit.enable = true;
   # Enable sound.
-  sound.enable = false;
+  # sound.enable = false;
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -193,7 +193,7 @@ in
     packages = with pkgs; [
       corefonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       liberation_ttf
       fira-code
@@ -233,7 +233,7 @@ in
     };
   };
 
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
 
   # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {

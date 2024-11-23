@@ -77,7 +77,6 @@
     bluedevil
     kate
     ktorrent
-    kdeconnect
     yakuake
     simple-scan
     okular
@@ -172,7 +171,6 @@
     bolt
     dislocker
     bpfmon
-    bpftool
     bpftools
     bpftrace
     miraclecast
@@ -193,6 +191,7 @@
     glxinfo
     gpu-viewer
     duplicati
+    nextdns
   ];
 }
 
