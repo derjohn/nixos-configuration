@@ -183,7 +183,6 @@
     lsof
     dive
     podman-tui
-    docker-compose
     podman-compose
     lm_sensors
     vulkan-tools
