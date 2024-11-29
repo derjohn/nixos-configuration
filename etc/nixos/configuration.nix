@@ -282,9 +282,12 @@ in
   # Firewall - enabled by default!
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 51820 51821 51822 53317 ];
+  networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
   networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 53317 ];
+  networking.firewall.allowedTCPPortRanges = [ { from = 32768; to = 60999; } ];
   networking.firewall.checkReversePath = "loose";
   networking.firewall.logReversePathDrops = true;
+  networking.firewall.logRefusedConnections = true;
   # networking.nat.enable = true;
   # networking.nat.externalInterface = "wlp0s20f3";
   # networking.nat.internalInterfaces = [ "wg*" "virbr*" "docker*" ];
