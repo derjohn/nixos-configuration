@@ -83,7 +83,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     # driSupport32Bit = true; # for wine with openGL
     # setLdLibraryPath = true;
     extraPackages = with pkgs; [
-      onevpl-intel-gpu
+      vpl-gpu-rt
       # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05
       pkgs.mesa.drivers
     ];
