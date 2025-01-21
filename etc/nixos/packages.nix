@@ -190,6 +190,11 @@
     gpu-viewer
     duplicati
     nextdns
+    mdadm
+    uefitool
+    vulkan-tools
+    clinfo
+    zfs
   ];
 }
 

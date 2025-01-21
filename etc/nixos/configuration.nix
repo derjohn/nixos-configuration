@@ -18,6 +18,7 @@ in
       ./k3s.nix
       <home-manager/nixos>
       ./vpn.nix
+      ./specific/buckle.nix
       # ./ssh.nix
       # ./etc.nix
     ];
@@ -48,7 +49,8 @@ in
  services.journald.extraConfig = ''
    SystemMaxUse=2G
   '';
-  networking.hostName = "buckle"; # Define your hostname.
+  # networking.hostName = "buckle"; # Define your hostname.
+  # networking.hostId = "f00dcafe";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
   powerManagement.powertop.enable = true;
@@ -232,8 +234,6 @@ in
     };
   };
 
-  programs.bash.completion.enable = true;
-
   # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {
     isNormalUser = true;
@@ -262,6 +262,7 @@ in
   users.groups.libvirtd.members = [ "root" "aj" ];
   # virtualisation.virtualbox.host.enable = true;
   #  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.waydroid.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -271,6 +272,7 @@ in
     enable = true;
     # enableSSHSupport = true;
   };
+  programs.bash.completion.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -349,6 +351,11 @@ in
   #     ];
   #     NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   # };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   system.activationScripts = {
     createSymlimks = {
