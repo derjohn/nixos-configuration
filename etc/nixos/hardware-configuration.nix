@@ -83,9 +83,10 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     # driSupport32Bit = true; # for wine with openGL
     # setLdLibraryPath = true;
     extraPackages = with pkgs; [
-      vpl-gpu-rt
-      # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05
+      vpl-gpu-rt # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05 and tiger lake (11gen)
       pkgs.mesa.drivers
+      vulkan-loader
+      vulkan-tools
     ];
     ## extraPackages = with pkgs; [
     ##   intel-compute-runtime

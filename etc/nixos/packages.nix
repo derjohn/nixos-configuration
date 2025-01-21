@@ -81,7 +81,6 @@
     simple-scan
     okular
     firefox
-    chromium
     tor 
     gwenview
     digikam
@@ -195,6 +194,7 @@
     vulkan-tools
     clinfo
     zfs
+    ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
 
