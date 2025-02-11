@@ -38,7 +38,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     device = "/dev/disk/by-partlabel/luks";
     preLVM = true;
   };
-   
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/f088559d-aaca-48db-9c5c-52bdfe025c06";
       fsType = "ext4";
@@ -140,6 +140,10 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     ];
   };
   services.fstrim.enable = true;
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
   services.udev.extraRules = ''
     # Flexbox rules
     #V2 Legacy

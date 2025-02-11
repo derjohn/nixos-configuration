@@ -191,9 +191,13 @@
     nextdns
     mdadm
     uefitool
+    efibootmgr
     vulkan-tools
     clinfo
     zfs
+    inxi
+    ntfs3g
+    globalprotect-openconnect
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
