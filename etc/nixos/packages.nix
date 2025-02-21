@@ -198,6 +198,7 @@
     inxi
     ntfs3g
     globalprotect-openconnect
+    weston
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
