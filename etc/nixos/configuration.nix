@@ -150,7 +150,6 @@ in
   hardware.sane.enable = true;
   hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.hplip nixos-unstable.utsushi];
   # unfree:pkgs.hplipWithPlugin pkgs.epkowa
-  services.udev.packages = [ nixos-unstable.utsushi ];
   services.avahi = {
     enable   = true;
     nssmdns4 = true;

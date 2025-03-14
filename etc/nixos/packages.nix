@@ -199,6 +199,7 @@
     ntfs3g
     globalprotect-openconnect
     weston
+    libqmi
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }

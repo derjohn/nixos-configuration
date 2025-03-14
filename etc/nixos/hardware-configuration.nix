@@ -139,10 +139,13 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
       miraclecast
     ];
   };
+  hardware.usb-modeswitch.enable = true;
   services.fstrim.enable = true;
-  services.udev.packages = [
-    pkgs.platformio-core
-    pkgs.openocd
+  services.udev.packages = with pkgs; [
+    utsushi
+    usb-modeswitch-data
+    platformio-core
+    openocd
   ];
   services.udev.extraRules = ''
     # Flexbox rules
