@@ -200,6 +200,8 @@
     globalprotect-openconnect
     weston
     libqmi
+    uqmi
+    modemmanager
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
