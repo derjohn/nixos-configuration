@@ -5,6 +5,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  machineId       = builtins.readFile "/etc/nixos/machine-id";
   variables       = import ./variables.nix;
   nixos-unstable  = import <nixos-unstable> { };
 in
@@ -18,10 +19,9 @@ in
       ./k3s.nix
       <home-manager/nixos>
       ./vpn.nix
-      ./specific/buckle.nix
-      # ./ssh.nix
-      # ./etc.nix
-    ];
+    ]
+    ++ (if machineId == "4c4c4544-0054-3510-8043-cac04f363933" then [ ./specific/buckle.nix ] else [])
+    ;
 
   #nix = {
   #  package = pkgs.nixFlakes;
@@ -239,8 +239,8 @@ in
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "podman" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
-    subUidRanges = [ { count = 1000; startUid = 1000000; } ];
-    subGidRanges = [ { count = 1000; startGid = 1000000; } ];
+    subUidRanges = [ { count = 10000; startUid = 1000000; } ];
+    subGidRanges = [ { count = 10000; startGid = 1000000; } ];
   };
 
   users.users.ajzwo = {
@@ -315,7 +315,6 @@ in
     rckt  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/rckt.conf ''; autoStart = false; };
     ajssl = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/ajssl.conf ''; autoStart = false; };
     crnl  = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/crnl.conf ''; autoStart = false; };
-    # kmo   = { config = '' config /home/aj/.shared-configs/etc/openvpn/client/kmo.conf ''; autoStart = false; };
     # spare         = { config = '' config ''; };
   };
 
