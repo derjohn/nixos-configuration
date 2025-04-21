@@ -6,5 +6,5 @@ nix-channel --add https://nixos.org/channels/nixos-24.11 nixos
 ```
 
 # Set UUID
-cat /sys/devices/virtual/dmi/id/product_uuid > /etc/nixos/machine-id
+echo -n $(cat /sys/devices/virtual/dmi/id/product_uuid) > /etc/nixos/machine-id
 

@@ -70,6 +70,7 @@
     ark
     kgpg
     pinentry-qt
+    kdePackages.plasma-workspace
     kdeplasma-addons
     kdePackages.dolphin-plugins
     plasma-thunderbolt

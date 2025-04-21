@@ -3,10 +3,17 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  machineid       = import ./machineid.nix; 
+in
+
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+    ]
+    ++ (if machineid.uuid == "4c4c4544-0054-3510-8043-cac04f363933" then [ ./specific/buckle.nix ] else [])
+    ++ (if machineid.uuid == "f5991c80-be2e-11ef-b260-ac8bbeed7a00" then [ ./specific/pickpocket.nix ] else [])
+    ;
 
   # boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "sr_mod" ];
@@ -39,76 +46,15 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     preLVM = true;
   };
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f088559d-aaca-48db-9c5c-52bdfe025c06";
-      fsType = "ext4";
-      options = [ "noatime" "nodiratime" "discard" ];
-    };
-
-#   fileSystems."/boot" =
-#     { device = "/dev/disk/by-uuid/CB58-328D";
-#       fsType = "vfat";
-#     };
-
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/B776-B3E2";
-      fsType = "vfat";
-    };
-
-  # /dev/mapper/vg-home: UUID="9b79d0d6-a468-4960-b515-85d41a4b49db" UUID_SUB="1a2986a5-4c72-4e0b-aa5e-6dd1cd52179e" BLOCK_SIZE="4096" TYPE="btrfs"
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/9b79d0d6-a468-4960-b515-85d41a4b49db";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" "nodiratime" "discard" ];
-    };
-
-  # /dev/mapper/vg-swap: UUID="b903769b-651f-4d5f-9688-299c986a2c64" TYPE="swap"
-  # swapDevices = [ { device = "/dev/disk/by-uuid/b903769b-651f-4d5f-9688-299c986a2c64"; } ];
-  swapDevices = [ ];
-  # zramctl to check compression
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-    memoryPercent = 20;
-  };
-
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
   hardware.sensor.iio.enable = true;
 
-  # nix-shell -p libva-utils --run vainfo
-  hardware.graphics = {
-    enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true; # for wine with openGL
-    # setLdLibraryPath = true;
-    extraPackages = with pkgs; [
-      vpl-gpu-rt # Use vpl-gpu-rt instead of onevpl-intel-gpu > nixos 24.05 and tiger lake (11gen)
-      pkgs.mesa.drivers
-      vulkan-loader
-      vulkan-tools
-    ];
-    ## extraPackages = with pkgs; [
-    ##   intel-compute-runtime
-    ##   intel-media-driver # LIBVA_DRIVER_NAME=iHD
-    ##   # vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-    ##   # vaapiVdpau # this is for nvidia only
-    ##   # libvdpau-va-gl # some legacy , see https://discourse.nixos.org/t/failed-vaapi-init/23317/2
-    ##   # libGL
-    ##   pkgs.mesa.drivers
-    ## ];
-
-  };
   # environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
   # environment.sessionVariables.LIBVA_DRIVER_NAME = "i965";
   # libva-intel-driver/vaapiIntel: i965 intel-media-driver: iHD
   hardware.acpilight.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
-  services.thermald = {
-    debug = true;
-    enable = true;
-    configFile = "/etc/nixos/thermal-conf-handcrafted.xml";
-  };
   hardware.fancontrol.enable = false;
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp

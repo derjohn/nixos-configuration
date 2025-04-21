@@ -5,7 +5,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  machineId       = builtins.readFile "/etc/nixos/machine-id";
+  smachineId      = config.systemd.machineId;
   variables       = import ./variables.nix;
   nixos-unstable  = import <nixos-unstable> { };
 in
@@ -19,9 +19,7 @@ in
       ./k3s.nix
       <home-manager/nixos>
       ./vpn.nix
-    ]
-    ++ (if machineId == "4c4c4544-0054-3510-8043-cac04f363933" then [ ./specific/buckle.nix ] else [])
-    ;
+    ];
 
   #nix = {
   #  package = pkgs.nixFlakes;
@@ -260,11 +258,12 @@ in
     };
   };
   virtualisation.lxd.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.qemu.runAsRoot = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+    qemu.runAsRoot = true;
+  };
   users.groups.libvirtd.members = [ "root" "aj" ];
-  # virtualisation.virtualbox.host.enable = true;
-  #  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.waydroid.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
