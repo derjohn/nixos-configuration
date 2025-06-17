@@ -80,7 +80,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
       };
     };
     upower.enable = true;
-    # upower -i $(upower -e | grep 'BAT'
+    # upower -i $(upower -e | grep 'BAT')
     dbus.packages = with pkgs; [
       miraclecast
     ];

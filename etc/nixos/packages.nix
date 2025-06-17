@@ -203,6 +203,7 @@
     libqmi
     uqmi
     modemmanager
+    proxychains-ng
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
