@@ -29,7 +29,7 @@
     inkscape
     jq
     kdiff3
-    kompare
+    kdePackages.kompare
     krename
     krita
     krusader
@@ -61,41 +61,44 @@
     iptraf-ng
     # networkmanager-qt
     openvpn
-    kwalletmanager
+    kdePackages.kwalletmanager
     kwalletcli
-    kwallet-pam
+    kdePackages.kwallet-pam
     # ssh-add prompts a user for a passphrase using KDE. Not sure if it is used
     # by anything? ssh-add just asks passphrase on the console.
     #ksshaskpass
-    ark
-    kgpg
+    kdePackages.ark
+    kdePackages.kgpg
     pinentry-qt
-    kdePackages.plasma-workspace
-    kdeplasma-addons
+    kdePackages.kdeplasma-addons
     kdePackages.dolphin-plugins
-    plasma-thunderbolt
-    spectacle
+    kdePackages.qtvirtualkeyboard
+    kdePackages.kcoreaddons
+    kdePackages.kcmutils
+    libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.kcmutils
+    kdePackages.plasma-thunderbolt
+    kdePackages.spectacle
     # bluedevil
-    kate
-    ktorrent
-    yakuake
+    kdePackages.kate
+    kdePackages.ktorrent
+    kdePackages.yakuake
     simple-scan
-    okular
+    kdePackages.okular
     firefox
-    tor 
-    gwenview
-    digikam
+    tor
+    kdePackages.gwenview
     gimp-with-plugins
     vlc
-    konsole
+    kdePackages.konsole
     kdePackages.dolphin
     parted
     fatresize
     nmap
-    dd_rescue
+    # dd_rescue
     undervolt
     asdf
-    kde-gtk-config
+    kdePackages.kde-gtk-config
     materia-theme
     arc-icon-theme
     arc-kde-theme
@@ -107,7 +110,9 @@
     mc
     ncdu
     qemu-utils
-    qemu_full
+    # (pkgs.qemu_full.override { cephSupport = false; })
+    qemu_kvm
+    OVMFFull
     libvirt
     file
     inetutils
@@ -156,13 +161,14 @@
     restic
     autorestic
     proxychains
+    proxychains-ng
     openconnect
     networkmanager-openconnect
     ethtool
     atftp
     lynx
     w3m
-    kmag
+    kdePackages.kmag
     libguestfs
     f2fs-tools
     docker-buildx
@@ -172,7 +178,7 @@
     bpfmon
     bpftools
     bpftrace
-    miraclecast
+    # miraclecast
     memtester
     nvme-cli
     libinput
@@ -203,7 +209,21 @@
     libqmi
     uqmi
     modemmanager
-    proxychains-ng
+    dhcpcd
+    xorg.xev
+    xorg.xhost
+    wlr-randr
+    wayland-utils
+    dmenu
+    libmbim
+    maliit-keyboard
+    maliit-framework
+    CuboCore.corekeyboard
+    onboard
+    dconf
+    glib
+    dconf-editor
+    exfat
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }

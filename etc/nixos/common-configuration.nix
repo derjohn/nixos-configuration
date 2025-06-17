@@ -5,16 +5,13 @@
 { config, pkgs, lib, ... }:
 
 let
-  smachineId      = config.systemd.machineId;
   variables       = import ./variables.nix;
   nixos-unstable  = import <nixos-unstable> { };
 in
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      <nixos-hardware/dell/xps/13-9310>
-      ./hardware-configuration.nix
+    [ ./hardware-configuration.nix
       ./packages.nix
       ./k3s.nix
       <home-manager/nixos>
@@ -34,7 +31,10 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_lqx);
+  boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
+  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_12);
+  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_14);
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
@@ -91,7 +91,7 @@ in
     earlySetup = true;
     # font = "Lat2-Terminus16";
     font = "latarcyrheb-sun32";
-    keyMap = "de";
+    # keyMap = "de";
   };
   services.fprintd.enable = lib.mkForce false; # unfree binary !
 
@@ -115,8 +115,21 @@ in
   services.xserver.enable = true;
 
   services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "plasmax11";
+  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.defaultSession = "plasma";
   services.desktopManager.plasma6.enable = true;
+
+#  # Enable Sway (Wayland compositor)
+#  programs.sway = {
+#    enable = true;
+#    wrapperFeatures.gtk = true; # For GTK theming
+#    extraPackages = with pkgs; [
+#      swaylock       # Lockscreen
+#      swayidle       # Idle management
+#      wl-clipboard   # Clipboard for Wayland
+#      mako           # Notification daemon
+#    ];
+#  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "de";
@@ -160,7 +173,7 @@ in
   security.rtkit.enable = true;
   # Enable sound.
   # sound.enable = false;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     extraConfig.pipewire = {
@@ -204,7 +217,7 @@ in
       terminus_font_ttf
       gentium
       cantarell-fonts
-      (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
+      nerd-fonts.droid-sans-mono
     ];
 
     fontconfig = {
@@ -224,7 +237,8 @@ in
         autohint = true; # no difference
       };
 
-      subpixel = {
+      subpixel = lib.mkDefault {
+
         # Makes it bolder
         rgba = "rgb";
         lcdfilter = "default"; # no difference
@@ -258,12 +272,11 @@ in
     };
   };
   virtualisation.lxd.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
-    qemu.runAsRoot = true;
-  };
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.runAsRoot = true;
   users.groups.libvirtd.members = [ "root" "aj" ];
+  # virtualisation.virtualbox.host.enable = true;
+  #  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   virtualisation.waydroid.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -287,7 +300,7 @@ in
   networking.firewall.enable = true;
   networking.firewall.allowedUDPPorts = [ 69 631 22000 21027 51820 51821 51822 53317 ];
   networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
-  networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 53317 ];
+  networking.firewall.allowedTCPPorts = [ 69 631 22000 22222 11987 53317 ];
   networking.firewall.allowedTCPPortRanges = [ { from = 32768; to = 60999; } ];
   networking.firewall.checkReversePath = "loose";
   networking.firewall.logReversePathDrops = true;
