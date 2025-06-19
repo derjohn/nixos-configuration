@@ -80,11 +80,12 @@ in
     LC_MESSAGES = "en_US.UTF-8";
     LC_CTYPE="en_US.UTF-8";
     LC_TIME = "de_DE.UTF-8";
-    LC_ALL = "C.UTF-8";
+    # LC_ALL = "C.UTF-8";
     # LC_ALL = "de_DE.UTF-8";
     LC_MONETARY = "de_DE.UTF-8";
     LC_PAPER = "de_DE.UTF-8";
     LC_NUMERIC = "de_DE.UTF-8";
+    LC_COLLATE = "de_DE.UTF-8";
   };
 
   console = {
