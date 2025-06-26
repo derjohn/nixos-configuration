@@ -113,6 +113,7 @@
     # (pkgs.qemu_full.override { cephSupport = false; })
     qemu_kvm
     OVMFFull
+    virtiofsd
     libvirt
     file
     inetutils
