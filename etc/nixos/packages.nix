@@ -225,6 +225,8 @@
     glib
     dconf-editor
     exfat
+    k3sup
+    k3s
     ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
   ];
 }
