@@ -23,6 +23,7 @@ let
       sha256 = "sha256-84W40++U+5/kTI84vGEqAVb93TCgFPduBkhMQG0yDRo=";
     };
   });
+
   # androidComposition = unstable.androidenv.androidPkgs_9_0.androidsdk;
 
 
@@ -73,7 +74,21 @@ in
     LC_TIME=de_DE.UTF-8
     LC_COLLATE=de_DE.UTF-8
   '';
-  xdg.configFile."plasma-localerc".force = true; 
+  xdg.configFile."plasma-localerc".force = true;
+
+  home.file."${config.xdg.dataHome}/applications/ferdium-second.desktop" = {
+    text = ''
+      [Desktop Entry]
+      Version=1.0
+      Name=Ferdium Special Browser Options
+      Exec=ferdium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist
+      Icon=ferdium
+      Terminal=false
+      Type=Application
+      Categories=Network;InstantMessaging;
+    '';
+    executable = true;
+  };
 
   programs.command-not-found.enable = true;
 

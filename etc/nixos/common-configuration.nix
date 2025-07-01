@@ -30,9 +30,9 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_lqx);
-  boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
+  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_12);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_14);
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
