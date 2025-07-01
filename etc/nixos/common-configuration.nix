@@ -76,7 +76,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "de_DE.UTF-8/UTF-8" "C.UTF-8/UTF-8" ];
   i18n.extraLocaleSettings = {
-    LANG = "de_DE.UTF-8";
+    # LANG = "de_DE.UTF-8";
     LC_MESSAGES = "en_US.UTF-8";
     LC_CTYPE="en_US.UTF-8";
     LC_TIME = "de_DE.UTF-8";
@@ -86,6 +86,9 @@ in
     LC_PAPER = "de_DE.UTF-8";
     LC_NUMERIC = "de_DE.UTF-8";
     LC_COLLATE = "de_DE.UTF-8";
+    LC_ADDRESS = "de_DE.UTF-8";
+    LC_TELEPHONE = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
   };
 
   console = {
@@ -183,6 +186,12 @@ in
         { name = libpipewire-module-switch-on-connect }
       }
       '';
+      "10-custom-rates" = ''{
+      context.properties = {
+        default.clock.rate = 44100;
+        default.clock.allowed-rates = [ 44100 ];
+      }
+      '';
     };
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -193,8 +202,28 @@ in
       enable = true;
       package = pkgs.wireplumber;
     };
-  };
 
+    wireplumber.extraConfig = {
+      "10-jabra-rates.conf" = {
+        monitor.alsa.rules = [
+          {
+            matches = [
+              { node.name = "alsa_output.usb-Jabra_Jabra_Link_380-00.analog-stereo"; }
+              { node.name = "alsa_input.usb-Jabra_Jabra_Link_380-00.analog-stereo"; }
+            ];
+            actions = {
+              update-props = {
+                audio.rate = 44100;
+                # clock.rate = 44100;
+                # clock.allowed-rates = "[ 44100 ]";
+                # node.force-rate = 44100; # This is a direct force on the node
+              };
+            };
+          }
+        ];
+      };
+    };
+  };
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "corefonts"
       ];
