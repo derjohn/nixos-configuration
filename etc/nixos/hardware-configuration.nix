@@ -78,7 +78,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     # upower -i $(upower -e | grep 'BAT')
     dbus.packages = with pkgs; [
       maliit-framework
-      # miraclecast
+      miraclecast
     ];
   };
   hardware.usb-modeswitch.enable = true;

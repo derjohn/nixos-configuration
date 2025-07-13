@@ -34,7 +34,6 @@ in
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_lqx);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_12);
-  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_14);
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
@@ -301,7 +300,7 @@ in
       defaultNetwork.settings.dns_enabled = true;
     };
   };
-  virtualisation.lxd.enable = true;
+  # virtualisation.lxd.enable = true;
   virtualisation.libvirtd.enable = true;
   virtualisation.libvirtd.qemu.runAsRoot = true;
   users.groups.libvirtd.members = [ "root" "aj" ];
