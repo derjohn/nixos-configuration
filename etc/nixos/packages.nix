@@ -29,6 +29,7 @@
     inkscape
     jq
     kdiff3
+    kdePackages.kfind
     kdePackages.kompare
     krename
     krita
@@ -230,7 +231,8 @@
     linuxPackages_latest.cpupower
     # ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
     # ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,Vulkan --ignore-gpu-blocklist --enable-unsafe-webgpu --use-angle=vulkan"; } )
-    ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-unsafe-webgpu"; } )
+    # ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-unsafe-webgpu"; } )
+    ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist"; } )
   ];
 }
 

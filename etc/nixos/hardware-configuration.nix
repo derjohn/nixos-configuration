@@ -67,11 +67,17 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
         STOP_CHARGE_THRESH_BAT0="80";
         CPU_SCALING_GOVERNOR_ON_AC="performance";
         CPU_SCALING_GOVERNOR_ON_BAT="powersave";
-	MAX_LOST_WORK_SECS_ON_BAT="15";
-        # 100 being the maximum, limit the speed of my CPU to reduce
-        # heat and increase battery usage:
+        MAX_LOST_WORK_SECS_ON_AC="15";
+        MAX_LOST_WORK_SECS_ON_BAT="60";
         CPU_MAX_PERF_ON_AC="100";
         CPU_MAX_PERF_ON_BAT="75";
+        CPU_ENERGY_PERF_POLICY_ON_AC="balance_performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT="balance_power";
+        USB_AUTOSUSPEND="1";
+        USB_DENYLIST="4242:4242 1337:1337";
+        USB_EXCLUDE_AUDIO="1";
+        USB_EXCLUDE_BTUSB="1";
+        USB_EXCLUDE_WWAN="0";
       };
     };
     upower.enable = true;
@@ -92,17 +98,17 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   services.udev.extraRules = lib.mkBefore ''
     # Flexbox rules
     #V2 Legacy
-    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="5750",MODE="0666"
-    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="5750",MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="5750", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5750", MODE="0666"
     #V2
-    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="[aA]0[eE]7",MODE="0666"
-    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="[aA]0[eE]7",MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="[aA]0[eE]7", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="[aA]0[eE]7", MODE="0666"
     #V3
-    SUBSYSTEM=="usb",ATTR{idVendor}=="0483",ATTR{idProduct}=="[aA]0[eE]8",MODE="0666"
-    KERNEL=="hidraw*",ATTRS{idVendor}=="0483",ATTRS{idProduct}=="[aA]0[eE]8",MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="[aA]0[eE]8", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="[aA]0[eE]8", MODE="0666"
     #V4  16D0 0B1A
-    SUBSYSTEM=="usb",ATTR{idVendor}=="16[dD]0",ATTR{idProduct}=="0[bB]1[aA]",MODE="0666"
-    KERNEL=="hidraw*",ATTRS{idVendor}=="16[dD]0",ATTRS{idProduct}=="0[bB]1[aA]",MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="16[dD]0", ATTR{idProduct}=="0[bB]1[aA]", MODE="0666"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="16[dD]0", ATTRS{idProduct}=="0[bB]1[aA]", MODE="0666"
   '';
 }
 
