@@ -1,5 +1,4 @@
-{ libs, config, pkgs, ... }:
-
+{ config, pkgs, lib, ... }:
 
 {
   # pkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "corefonts" ];

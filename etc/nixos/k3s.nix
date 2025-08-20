@@ -1,3 +1,5 @@
+{ config, pkgs, lib, ... }:
+
 {
   # This is required so that pod can reach the API server (running on port 6443 by default)
   networking.firewall.allowedTCPPorts = [ 6443 ];
@@ -12,6 +14,7 @@
     ];
   };
 
-  systemd.services.k3s.wantedBy = [ ]; # disables k3s after reboot
+  systemd.services.k3s.wantedBy = lib.mkForce []; # disables k3s service by default
+
 }
 
