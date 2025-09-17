@@ -37,7 +37,7 @@ in
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
-  boot.binfmt.emulatedSystems = [ "armv7l-linux" "aarch64-linux" ]; # for docker buildx
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" "aarch64-linux" "x86_64-windows" "i686-windows" ]; # for docker buildx and winehq
   hardware.enableRedistributableFirmware = true;
 
   # hardware.enableAllFirmware = true;
