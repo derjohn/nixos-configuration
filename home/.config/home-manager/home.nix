@@ -17,10 +17,10 @@ let
   ### python-with-my-packages = unstable.python3.withPackages my-python-packages;
   # python-with-my-packages = pkgs.python3.withPackages my-python-packages;
   ferdiumLatest = pkgs.ferdium.overrideAttrs (oldAttrs: rec {
-    version = "7.1.0";
+    version = "7.1.1";
     src = fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-84W40++U+5/kTI84vGEqAVb93TCgFPduBkhMQG0yDRo=";
+      sha256 = "sha256-1jXo8MMk2EEkLo0n4ICmGJteKProLYKkMF//g63frHs=";
     };
   });
 
@@ -47,7 +47,7 @@ in
   home.username = "aj";
   home.homeDirectory = "/home/aj";
   # pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy
-  home.packages = [ pkgs._3proxy pkgs.adoptopenjdk-icedtea-web pkgs.age pkgs.kdePackages.akonadi pkgs.android-tools pkgs.ansible pkgs.antimicrox pkgs.appimage-run pkgs.arduino-cli pkgs.asdf-vm pkgs.autojump pkgs.avrdude pkgs.aws-mfa pkgs.awscli2 pkgs.azure-cli pkgs.barman pkgs.brave pkgs.bruno pkgs.btop pkgs.byzanz pkgs.cadaver pkgs.cheese pkgs.chntpw pkgs.neo-cowsay pkgs.dart pkgs.darktable pkgs.dfu-util pkgs.dfu-programmer unstable.delve pkgs.dialog pkgs.dos2unix pkgs.drill pkgs.du-dust pkgs.ebusd pkgs.envsubst pkgs.evince pkgs.exo pkgs.ffmpeg-full pkgs.filezilla pkgs.firebase-tools pkgs.fluent-bit pkgs.freecad pkgs.freerdp pkgs.gh pkgs.ghostscript pkgs.git-crypt pkgs.git-filter-repo pkgs.glibc pkgs.gmp pkgs.gnome-network-displays pkgs.gsettings-qt pkgs.go-ethereum pkgs.google-drive-ocamlfuse pkgs.gron pkgs.grpc-gateway pkgs.grpc-tools pkgs.grpcurl pkgs.gsctl pkgs.gsettings-desktop-schemas pkgs.handbrake pkgs.hugo pkgs.hidapi pkgs.hunspell pkgs.hunspellDicts.de-de pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de_DE pkgs.hyphen pkgs.imagemagick pkgs.insomnia pkgs.ipmitool pkgs.jameica pkgs.john pkgs.johnny pkgs.kazam pkgs.kdePackages.kcalc pkgs.kdePackages.kdenlive kdePackages.qtvirtualkeyboard pkgs.keepassxc pkgs.kphotoalbum pkgs.krusader pkgs.kdePackages.kteatime pkgs.kdePackages.ktorrent pkgs.lapce pkgs.libnotify pkgs.libreoffice-fresh pkgs.librewolf (lib.hiPrio pkgs.localsend) pkgs.linphone pkgs.lxqt.pcmanfm-qt pkgs.mediathekview pkgs.monero-gui pkgs.mosh pkgs.mpv pkgs.mupdf pkgs.mycrypto pkgs.nextcloud-client pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.nodejs pkgs.oathToolkit pkgs.ocrmypdf pkgs.ollama pkgs.onlyoffice-bin pkgs.openjfx pkgs.openshot-qt pkgs.openssl pkgs.openstackclient pkgs.outils pkgs.paperwork pkgs.pavucontrol pkgs.pdf4qt pkgs.pdfarranger pkgs.pdfgrep pkgs.pdfsam-basic pkgs.pdsh pkgs.peek pkgs.pgadmin4-desktopmode pkgs.poppler-utils pkgs.pinta pkgs.pkgsCross.avr.buildPackages.gcc pkgs.platformio pkgs.playwright pkgs.playwright-driver pkgs.postgresql_16 pkgs.proto-contrib pkgs.protoc-gen-go pkgs.protoc-gen-go-grpc pkgs.protoc-gen-validate pkgs.pssh pkgs.pwgen pkgs.python3Full unstable.quba pkgs.qpdf pkgs.qrencode pkgs.rbenv pkgs.rclone pkgs.redocly-cli pkgs.regclient pkgs.regsync pkgs.ripgrep pkgs.rpl pkgs.rpmextract pkgs.ruby pkgs.rustdesk-flutter pkgs.s3cmd pkgs.siege pkgs.signal-desktop-bin pkgs.simplex-chat-desktop pkgs.sipcalc pkgs.socat pkgs.sops pkgs.speedtest-cli pkgs.kdePackages.neochat pkgs.sshpass pkgs.sshuttle pkgs.stoken pkgs.swaks pkgs.thunderbird-128 pkgs.tigervnc pkgs.unetbootin pkgs.untrunc-anthwlock pkgs.usbtop pkgs.viu unstable.vscodium pkgs.wineWowPackages.stable pkgs.winetricks pkgs.wireshark pkgs.x2goclient pkgs.xdotool pkgs.xorg.xhost pkgs.xsel pkgs.xan pkgs.yarn2nix pkgs.ydotool pkgs.zip pkgs.zlib python3Packages.pip python3Packages.virtualenv temurin-bin-17-low temurin-bin-21-low (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin]) phpstuff ferdiumLatest ];
+  home.packages = [ pkgs._3proxy pkgs.adoptopenjdk-icedtea-web pkgs.age pkgs.kdePackages.akonadi pkgs.android-tools pkgs.ansible pkgs.antimicrox pkgs.appimage-run pkgs.arduino-cli pkgs.asdf-vm pkgs.autojump pkgs.avrdude pkgs.aws-mfa pkgs.awscli2 pkgs.azure-cli pkgs.barman pkgs.brave pkgs.bruno pkgs.btop pkgs.byzanz pkgs.cadaver pkgs.cheese pkgs.chntpw pkgs.neo-cowsay pkgs.dart pkgs.darktable pkgs.dfu-util pkgs.dfu-programmer unstable.delve pkgs.dialog pkgs.dos2unix pkgs.drill pkgs.du-dust pkgs.ebusd pkgs.envsubst pkgs.evince pkgs.exo pkgs.ffmpeg-full pkgs.filezilla pkgs.firebase-tools pkgs.fluent-bit pkgs.freecad pkgs.freerdp pkgs.gh pkgs.ghostscript pkgs.git-crypt pkgs.git-filter-repo pkgs.glibc pkgs.gmp pkgs.gnome-network-displays pkgs.gsettings-qt pkgs.go-ethereum pkgs.google-drive-ocamlfuse pkgs.gron pkgs.grpc-gateway pkgs.grpc-tools pkgs.grpcurl pkgs.gsctl pkgs.gsettings-desktop-schemas pkgs.handbrake pkgs.hugo pkgs.hidapi pkgs.hunspell pkgs.hunspellDicts.de-de pkgs.hunspellDicts.en-us pkgs.hunspellDicts.de_DE pkgs.hyphen pkgs.imagemagick pkgs.insomnia pkgs.ipmitool pkgs.jameica pkgs.john pkgs.johnny pkgs.kazam pkgs.kdePackages.kcalc pkgs.kdePackages.kdenlive kdePackages.qtvirtualkeyboard pkgs.keepassxc pkgs.kphotoalbum pkgs.krusader pkgs.kdePackages.kteatime pkgs.kdePackages.ktorrent pkgs.lapce pkgs.libnotify pkgs.libreoffice-fresh pkgs.librewolf (lib.hiPrio pkgs.localsend) pkgs.linphone pkgs.lxqt.pcmanfm-qt pkgs.mediathekview pkgs.molly-guard pkgs.monero-gui pkgs.mosh pkgs.mpv pkgs.mupdf pkgs.mycrypto pkgs.nextcloud-client pkgs.nix-bundle pkgs.nixpkgs-fmt pkgs.nodejs pkgs.oathToolkit pkgs.ocrmypdf pkgs.ollama pkgs.onlyoffice-bin pkgs.openjfx pkgs.openshot-qt pkgs.openssl pkgs.openstackclient pkgs.outils pkgs.paperwork pkgs.pavucontrol pkgs.pdf4qt pkgs.pdfarranger pkgs.pdfgrep pkgs.pdfsam-basic pkgs.pdsh pkgs.peek pkgs.pgadmin4-desktopmode pkgs.poppler-utils pkgs.pinta pkgs.pkgsCross.avr.buildPackages.gcc pkgs.platformio pkgs.playwright pkgs.playwright-driver pkgs.postgresql_16 pkgs.proto-contrib pkgs.protoc-gen-go pkgs.protoc-gen-go-grpc pkgs.protoc-gen-validate pkgs.pssh pkgs.pwgen pkgs.python3Full unstable.quba pkgs.qpdf pkgs.qrencode pkgs.rbenv pkgs.rclone pkgs.redocly-cli pkgs.regclient pkgs.regsync pkgs.ripgrep pkgs.rpl pkgs.rpmextract pkgs.ruby pkgs.rustdesk-flutter pkgs.s3cmd pkgs.siege pkgs.signal-desktop-bin pkgs.simplex-chat-desktop pkgs.sipcalc pkgs.socat pkgs.sops pkgs.speedtest-cli pkgs.kdePackages.neochat pkgs.sshpass pkgs.sshuttle pkgs.stoken pkgs.swaks pkgs.thunderbird-128 pkgs.tigervnc pkgs.unetbootin pkgs.untrunc-anthwlock pkgs.usbtop pkgs.viu unstable.vscodium pkgs.wineWowPackages.stable pkgs.winetricks pkgs.wireshark pkgs.x2goclient pkgs.xdotool pkgs.xorg.xhost pkgs.xsel pkgs.xan pkgs.yarn2nix pkgs.ydotool pkgs.zip pkgs.zlib python3Packages.pip python3Packages.virtualenv temurin-bin-17-low temurin-bin-21-low (google-cloud-sdk.withExtraComponents [google-cloud-sdk.components.gke-gcloud-auth-plugin]) phpstuff ferdiumLatest ];
   # unstable.hoppscotch
   # nix-env -f .nix-defexpr/channels/nixos-unstable -iA signal-desktop
   home.sessionPath = [
@@ -185,12 +185,22 @@ in
 
   programs.looking-glass-client.enable = true;
 
-  dconf.settings."org/maliit/keyboard/maliit" = {
-      enabled-languages = [
-        "en"
-        "de"
-      ];
-      device = "tablet";
+  programs.nvchecker = {
+    enable = true;
+    settings = {
+      ferdium = {
+        source = "github";
+        github = "ferdium/ferdium-app";
+      };
     };
+  };
+
+  dconf.settings."org/maliit/keyboard/maliit" = {
+    enabled-languages = [
+      "en"
+      "de"
+    ];
+    device = "tablet";
+  };
 
 }

@@ -229,10 +229,8 @@
     k3s
     dump
     linuxPackages_latest.cpupower
-    # ( pkgs.chromium.override { commandLineArgs = "--enable-features=Vulkan --enable-unsafe-webgpu --use-angle=vulkan"; } )
-    # ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder,Vulkan --ignore-gpu-blocklist --enable-unsafe-webgpu --use-angle=vulkan"; } )
-    # ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-unsafe-webgpu"; } )
-    ( pkgs.chromium.override { commandLineArgs = "chromium --enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist"; } )
+    # see: https://wiki.nixos.org/wiki/Chromium
+    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --use-gl=desktop"; } )
      (pkgs.linuxPackagesFor config.boot.kernelPackages.kernel).turbostat
   ];
 }
