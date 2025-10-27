@@ -26,6 +26,10 @@ in
   # };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+     "mbedtls-2.28.10"
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -462,5 +466,15 @@ in
     "--verbose=7"
   ];
   services.atftpd.root = "/srv/tftp";
+
+  services.ollama = {
+    enable = true;
+    acceleration = false; # "rocm","cuda", false
+    loadModels = [
+      "codellama:7b-instruct"
+      "llama3"
+    ];
+  };
+
 }
 
