@@ -18,19 +18,11 @@ in
       ./vpn.nix
     ];
 
-  #nix = {
-  #  package = pkgs.nixFlakes;
-    # extraOptions = ''
-    #   experimental-features = nix-command flakes
-    # '';
-  # };
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   nixpkgs.config.permittedInsecurePackages = [
      "mbedtls-2.28.10"
   ];
 
-  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";

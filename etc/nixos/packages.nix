@@ -228,6 +228,7 @@
     k3sup
     k3s
     dump
+    ptouch-driver
     linuxPackages_latest.cpupower
     # see: https://wiki.nixos.org/wiki/Chromium
     ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --use-gl=desktop"; } )
