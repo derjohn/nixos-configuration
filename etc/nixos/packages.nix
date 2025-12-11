@@ -42,8 +42,8 @@
     virt-top
     virt-viewer
     pipewire
-    zsh-history
-    zsh-git-prompt
+    # zsh-history
+    # zsh-git-prompt
     zsh-nix-shell
     zsh-autoenv
     zsh
@@ -129,7 +129,7 @@
     bind
     sysstat
     iotop
-    ptouch-print    
+    ptouch-print
     psutils
     glibc
     patchelf
@@ -142,7 +142,7 @@
     lm_sensors
     unzip
     libguestfs
-    oathToolkit
+    oath-toolkit
     # rpl
     brightnessctl
     apacheHttpd
@@ -193,7 +193,7 @@
     podman-compose
     lm_sensors
     vulkan-tools
-    glxinfo
+    mesa-demos
     gpu-viewer
     duplicati
     nextdns

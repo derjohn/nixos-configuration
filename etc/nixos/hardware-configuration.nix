@@ -47,10 +47,10 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
   hardware.acpilight.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.i2c.enable = true;
-  programs.coolercontrol = {
-    enable = false;
-    nvidiaSupport = false;
-  };
+  # programs.coolercontrol = {
+  #   enable = false;
+  #   nvidiaSupport = false;
+  # };
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = null; # will be managed by tlp
   services.power-profiles-daemon.enable = false;

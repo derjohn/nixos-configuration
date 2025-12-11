@@ -21,6 +21,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.permittedInsecurePackages = [
      "mbedtls-2.28.10"
+     "qtwebengine-5.15.19"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -231,7 +232,7 @@ in
       corefonts
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       fira-code
       fira-code-symbols
