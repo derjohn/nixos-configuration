@@ -75,8 +75,8 @@
     kdePackages.qtvirtualkeyboard
     kdePackages.kcoreaddons
     kdePackages.kcmutils
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.kcmutils
+    # libsForQt5.qt5.qtgraphicaleffects
+    # libsForQt5.kcmutils
     kdePackages.plasma-thunderbolt
     kdePackages.spectacle
     # bluedevil
@@ -205,7 +205,7 @@
     zfs
     inxi
     ntfs3g
-    globalprotect-openconnect
+    # globalprotect-openconnect
     weston
     libqmi
     uqmi
@@ -229,9 +229,11 @@
     k3s
     dump
     ptouch-driver
+    rocmPackages.rocminfo
+    nh
     linuxPackages_latest.cpupower
     # see: https://wiki.nixos.org/wiki/Chromium
-    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --use-gl=desktop"; } )
+    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy"; } )
      (pkgs.linuxPackagesFor config.boot.kernelPackages.kernel).turbostat
   ];
 }
