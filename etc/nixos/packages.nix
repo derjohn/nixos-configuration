@@ -229,9 +229,11 @@
     k3s
     dump
     ptouch-driver
+    fprintd
     linuxPackages_latest.cpupower
     # see: https://wiki.nixos.org/wiki/Chromium
-    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --use-gl=desktop"; } )
+    # ( pkgs.chromium.override { commandLineArgs = "--enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --use-gl=desktop --ozone-platform-hint=auto"; } )
+    ( pkgs.chromium.override { commandLineArgs = "--enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy"; } )
      (pkgs.linuxPackagesFor config.boot.kernelPackages.kernel).turbostat
   ];
 }
