@@ -19,6 +19,8 @@ in
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "03:45" ];
   nixpkgs.config.permittedInsecurePackages = [
      "mbedtls-2.28.10"
      "qtwebengine-5.15.19"
@@ -308,6 +310,7 @@ in
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+  programs.dconf.enable = true;
   programs.firejail.enable = true;
   programs.mtr.enable = true;
   programs.gnupg.agent = {

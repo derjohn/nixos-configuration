@@ -231,9 +231,16 @@
     ptouch-driver
     rocmPackages.rocminfo
     nh
+    net-tools
+    gsettings-desktop-schemas
+    adwaita-icon-theme
+    gtk3
+    gtk4
+    libsecret
+    nettools
     linuxPackages_latest.cpupower
     # see: https://wiki.nixos.org/wiki/Chromium
-    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy"; } )
+    ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --ozone-platform=x11"; } )
      (pkgs.linuxPackagesFor config.boot.kernelPackages.kernel).turbostat
   ];
 }
