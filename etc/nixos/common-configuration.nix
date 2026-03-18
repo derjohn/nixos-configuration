@@ -14,7 +14,6 @@ in
     [ ./hardware-configuration.nix
       ./packages.nix
       ./k3s.nix
-      <home-manager/nixos>
       ./vpn.nix
     ];
 
@@ -162,7 +161,7 @@ in
   services.printing.defaultShared = false; # If you want
 
   hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.hplip nixos-unstable.utsushi];
+  hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.hplip pkgs.utsushi];
   # unfree:pkgs.hplipWithPlugin pkgs.epkowa
   services.avahi = {
     enable   = true;
@@ -419,7 +418,6 @@ in
   };
 
   home-manager.useGlobalPkgs = true;
-  programs.adb.enable = true;
   programs.kdeconnect.enable = true;
   ## android_sdk.accept_license = true;
 
@@ -463,15 +461,6 @@ in
     "--verbose=7"
   ];
   services.atftpd.root = "/srv/tftp";
-
-  services.ollama = {
-    enable = true;
-    acceleration = false; # "rocm","cuda", false
-    loadModels = [
-      "codellama:7b-instruct"
-      "llama3"
-    ];
-  };
 
 }
 
