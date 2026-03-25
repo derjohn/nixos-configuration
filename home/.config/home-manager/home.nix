@@ -133,6 +133,8 @@ in
       . ~/.bashrc.extra
     '';
     initExtra = ''
+      . "${pkgs.asdf-vm}/etc/profile.d/asdf-prepare.sh"
+      . "${pkgs.asdf-vm}/share/bash-completion/completions/asdf.bash"
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       # export XDG_DATA_DIRS=$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share
     '';
@@ -144,10 +146,9 @@ in
   programs.zsh.enable = true;
   programs.zsh.dotDir = "${config.xdg.configHome}/zsh";
   programs.autojump.enable = true;
-#  programs.java = {
-#    enable = true;
-#    package = pkgs.jdk8;
-#  };
+  programs.java = {
+    enable = true;
+  };
 
   home.sessionVariables = {
     # PYTHONPATH = "${python-with-my-packages}/${python-with-my-packages.sitePackages}";
@@ -155,7 +156,6 @@ in
     # ANDROID_NDK_ROOT = "\${ANDROID_SDK_ROOT}/ndk-bundle";
     EDITOR="vim";
     JAVA_21_HOME = "${temurin-bin-21-low}/lib/openjdk";
-    JAVA_HOME = "${temurin-bin-21-low}/lib/openjdk";
     NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
       pkgs.stdenv.cc.cc
       pkgs.openssl
@@ -165,7 +165,6 @@ in
     NIX_LD = pkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
     XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:/run/current-system/sw/share";
   };
-
 
   programs.vim = {
     enable = true;
