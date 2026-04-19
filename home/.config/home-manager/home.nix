@@ -177,22 +177,22 @@ in
     plugins = with pkgs.vimPlugins; [ vim-airline nerdtree vim-better-whitespace ];
   };
 
-  programs.neovim = {
-    enable = true;
-    viAlias = false;
-    vimAlias = false;
-    extraConfig = ''
-      set number relativenumber
-      set mouse=v
-    '';
-    withPython3 = true;
-    withRuby = true;
-    withNodeJs = false;
-
-    extraPackages = with pkgs; [
-      python3Packages.flake8
-    ];
-  };
+#  programs.neovim = {
+#    enable = true;
+#    viAlias = false;
+#    vimAlias = false;
+#    extraConfig = ''
+#      set number relativenumber
+#      set mouse=v
+#    '';
+#    withPython3 = true;
+#    withRuby = true;
+#    # withNodeJs = false;
+#
+#    # extraPackages = with pkgs; [
+#    #   python3Packages.flake8
+#    # ];
+#  };
 
   programs.looking-glass-client.enable = true;
 
