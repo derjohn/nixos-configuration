@@ -29,6 +29,7 @@
        direnv
        gimp
        inkscape
+       inkscape-extensions.inkstitch
        jq
        kdiff3
        kdePackages.kfind
