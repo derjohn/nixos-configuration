@@ -237,6 +237,8 @@
        gtk4
        libsecret
        nettools
+       tshark
+       # termshark
        android-tools
        linuxPackages_latest.cpupower
        # see: https://wiki.nixos.org/wiki/Chromium
