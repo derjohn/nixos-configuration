@@ -290,12 +290,12 @@ in
     autoSubUidGidRange = true;
   };
 
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
       enable = true;
-      dockerCompat = false;
+      dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
   };
