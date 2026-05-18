@@ -64,7 +64,7 @@
        # networkmanager-qt
        openvpn
        kdePackages.kwalletmanager
-       kwallet-query
+       kdePackages.kwallet
        kdePackages.kwallet-pam
        # ssh-add prompts a user for a passphrase using KDE. Not sure if it is used
        # by anything? ssh-add just asks passphrase on the console.
