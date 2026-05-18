@@ -47,7 +47,6 @@
        virt-viewer
        pipewire
        zsh-nix-shell
-       zsh-autoenv
        zsh
        vimPlugins.deoplete-zsh
        oh-my-zsh
