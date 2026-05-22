@@ -246,6 +246,7 @@ in
       gentium
       cantarell-fonts
       nerd-fonts.droid-sans-mono
+      google-fonts
     ];
 
     fontconfig = {
