@@ -319,6 +319,7 @@ in
     pkgs.rbenv
     pkgs.rclone
     pkgs.redocly
+    pkgs.reptyr
     pkgs.ripgrep
     pkgs.rpl
     pkgs.rpmextract

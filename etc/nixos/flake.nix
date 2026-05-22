@@ -11,11 +11,11 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    gpdFanFlake.url = "github:Cryolitia/gpd-fan-driver";
+    # gpdFanFlake.url = "github:Cryolitia/gpd-fan-driver";
 
     };
 
-  outputs = { self, nixpkgs, llm-agents, home-manager, nixos-hardware, gpdFanFlake,... }: {
+  outputs = { self, nixpkgs, llm-agents, home-manager, nixos-hardware, ... }: {
     nixosConfigurations = {
       buckle = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -41,7 +41,7 @@
           ./specific/pickpocket/configuration.nix
 
           home-manager.nixosModules.home-manager
-          gpdFanFlake.nixosModules.default
+          # gpdFanFlake.nixosModules.default # mainline kernel sinc 6.18
         ];
       };
     };
