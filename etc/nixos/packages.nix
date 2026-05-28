@@ -7,7 +7,8 @@
      with pkgs; [
        llm-agents.packages.${pkgs.system}.qmd
        llm-agents.packages.${pkgs.system}.opencode
-       llm-agents.packages.${pkgs.system}.openclaw
+       # llm-agents.packages.${pkgs.system}.openclaw
+       llm-agents.packages.${pkgs.system}.zeroclaw
        nix-index
        usbutils
        pciutils
