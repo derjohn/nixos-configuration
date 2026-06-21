@@ -242,6 +242,7 @@
        # termshark
        android-tools
        distrobox
+       croc
        linuxPackages_latest.cpupower
        # see: https://wiki.nixos.org/wiki/Chromium
        ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --ozone-platform=x11"; } )
