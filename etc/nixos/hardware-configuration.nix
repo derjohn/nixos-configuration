@@ -64,7 +64,7 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
         # full charge.
         # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
         START_CHARGE_THRESH_BAT0="55";
-        STOP_CHARGE_THRESH_BAT0="80";
+        STOP_CHARGE_THRESH_BAT0="90";
         CPU_SCALING_GOVERNOR_ON_AC="powersave";
         CPU_SCALING_GOVERNOR_ON_BAT="powersave";
         MAX_LOST_WORK_SECS_ON_AC="15";

@@ -281,7 +281,7 @@ in
     pkgs.nextcloud-talk-desktop
     pkgs.nix-bundle
     pkgs.nixpkgs-fmt
-    pkgs.nodejs_22
+    pkgs.nodejs_26
     pkgs.oath-toolkit
     pkgs.ocrmypdf
     pkgs.ollama
