@@ -216,7 +216,7 @@ in
     pkgs.envsubst
     pkgs.evince
     pkgs.exo
-    pkgs.ferdium
+    unstable.ferdium
     pkgs.ffmpeg-full
     pkgs.filezilla
     pkgs.fluent-bit
