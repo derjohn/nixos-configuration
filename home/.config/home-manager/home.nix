@@ -326,6 +326,7 @@ in
     pkgs.ruby
     pkgs.rustdesk-flutter
     pkgs.s3cmd
+    unstable.signal-cli
     pkgs.signal-desktop
     pkgs.simplex-chat-desktop
     pkgs.sipcalc
