@@ -99,12 +99,13 @@ in
 
   # See: https://github.com/NixOS/nixpkgs/blob/nixos-20.09/nixos/modules/security/sudo.nix
   security.sudo.extraConfig = ''
-    Defaults timestamp_timeout=120
+    Defaults timestamp_timeout=180
   '';
   # security.sudo.wheelNeedsPassword = false;
   security.sudo.extraRules= [
     {  groups = [ "wheel" ];
       commands = [
+        { command = "/run/current-system/sw/bin/btop"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl status openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl stop openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl start openvpn*"; options = [ "NOPASSWD" ]; }

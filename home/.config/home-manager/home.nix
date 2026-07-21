@@ -199,7 +199,6 @@ in
     pkgs.awscli
     pkgs.azure-cli
     pkgs.bruno
-    pkgs.btop
     pkgs.byzanz
     pkgs.cadaver
     pkgs.cheese
