@@ -24,6 +24,7 @@ in
      "mbedtls-2.28.10"
      "qtwebengine-5.15.19"
   ];
+  nix.settings.tarball-ttl = 86400;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
