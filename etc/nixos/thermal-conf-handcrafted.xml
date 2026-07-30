@@ -4,14 +4,14 @@
  <Platform>
 	<Name> DELL XPS 9310 2-in-1 manually created </Name>
 	<ProductName>XPS 13 9310 2-in-1</ProductName>
-	<Preference>QUIET</Preference>
+	<Preference>PERFORMANCE</Preference>
 	<PPCC>
 		<PowerLimitIndex>0</PowerLimitIndex>
-		<PowerLimitMinimum>9000</PowerLimitMinimum>
+		<PowerLimitMinimum>20000</PowerLimitMinimum>
 		<PowerLimitMaximum>25000</PowerLimitMaximum>
 		<TimeWindowMinimum>28000</TimeWindowMinimum>
 		<TimeWindowMaximum>28000</TimeWindowMaximum>
-		<StepSize>250</StepSize>
+		<StepSize>2000</StepSize>
 	</PPCC>
 	<ThermalZones>
 		<ThermalZone>

@@ -5,7 +5,7 @@
   environment.systemPackages =
      # pkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "corefonts" ];
      with pkgs; [
-       llm-agents.packages.${pkgs.system}.qmd
+       # llm-agents.packages.${pkgs.system}.qmd
        llm-agents.packages.${pkgs.system}.opencode
        # llm-agents.packages.${pkgs.system}.openclaw
        llm-agents.packages.${pkgs.system}.zeroclaw
@@ -244,6 +244,8 @@
        distrobox
        croc
        btop
+       msr-tools
+       xsel
        linuxPackages_latest.cpupower
        # see: https://wiki.nixos.org/wiki/Chromium
        ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --ozone-platform=x11"; } )

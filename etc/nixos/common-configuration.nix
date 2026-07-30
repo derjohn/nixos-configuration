@@ -25,6 +25,12 @@ in
      "qtwebengine-5.15.19"
   ];
   nix.settings.tarball-ttl = 86400;
+  nix.settings = {
+    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-trusted-public-keys = [
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -284,6 +290,7 @@ in
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
     subUidRanges = [ { count = 10000; startUid = 1000000; } ];
     subGidRanges = [ { count = 10000; startGid = 1000000; } ];
+    linger = true;
   };
 
   users.users.ajzwo = {
