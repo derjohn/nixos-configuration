@@ -230,7 +230,7 @@ in
     envsubst
     evince
     exo
-    ferdium
+    unstable.ferdium
     # ferdiumLatest
     ffmpeg-full
     filezilla

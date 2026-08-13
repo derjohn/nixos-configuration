@@ -117,6 +117,9 @@ in
         { command = "/run/current-system/sw/bin/systemctl start openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl restart openvpn*"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/journalctl --vacuum-time=1h"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/nix-channel --update"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/nix-collect-garbage -d"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/sync"; options = [ "NOPASSWD" ]; }
       ];
     }
   ];
