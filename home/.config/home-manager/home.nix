@@ -10,10 +10,10 @@ let
   #    x86_64-linux = "sha256-ODQKFjBa2riJY26aPaAfLzuCyLYkB5oYSxIE28nMmwY=";
   #    aarch64-linux = "sha256-CYHoTw6JUyU63iTd9tAbfWVnb48WcZgGtjthqnlAD8I=";
   #  }
-    version = "7.1.3-nightly.3";
+    version = "7.2.2";
     src = pkgs.fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-FauUQO3FucLpIKxGAalCaD5jPAajXPR1X4yXHBmzqMI=";
+      sha256 = "sha256-zTJWVv7CHEH3Tg1bDqpxB+Kiraoli1jTvQ9hXn3MOWA=";
     };
   });
 
@@ -230,8 +230,8 @@ in
     envsubst
     evince
     exo
-    unstable.ferdium
-    # ferdiumLatest
+    # unstable.ferdium
+    ferdiumLatest
     ffmpeg-full
     filezilla
     fluent-bit
