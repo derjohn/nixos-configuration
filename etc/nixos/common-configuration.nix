@@ -35,9 +35,9 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.kernelPackages = pkgs.linuxPackages_7_2;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_lqx);
-  boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
+  # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_12);
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
   boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
@@ -120,6 +120,7 @@ in
         { command = "/run/current-system/sw/bin/nix-channel --update"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/nix-collect-garbage -d"; options = [ "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/sync"; options = [ "NOPASSWD" ]; }
+        { command = "/run/current-system/sw/bin/tlp fullcharge"; options = [ "NOPASSWD" ]; }
       ];
     }
   ];
@@ -343,7 +344,7 @@ in
   networking.firewall.trustedInterfaces = [ "lo" ];
   networking.firewall.allowedUDPPorts = [ 53 67 68 69 631 22000 21027 51820 51821 51822 53317 ];
   networking.firewall.allowedUDPPortRanges = [ { from = 32768; to = 60999; } ];
-  networking.firewall.allowedTCPPorts = [ 53 69 631 22000 22222 11987 53317 ];
+  networking.firewall.allowedTCPPorts = [ 53 69 631 8000 22000 22222 11987 53317 ];
   networking.firewall.allowedTCPPortRanges = [ { from = 32768; to = 60999; } ];
   networking.firewall.checkReversePath = "loose";
   networking.firewall.logReversePathDrops = true;

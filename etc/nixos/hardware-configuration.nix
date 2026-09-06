@@ -79,6 +79,8 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
         USB_EXCLUDE_AUDIO="1";
         USB_EXCLUDE_BTUSB="1";
         USB_EXCLUDE_WWAN="0";
+        CPU_MIN_PERF_ON_AC="30";
+        CPU_MIN_PERF_ON_BAT="0";
       };
     };
     upower.enable = true;

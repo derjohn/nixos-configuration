@@ -81,7 +81,7 @@ in
     executable = true;
   };
 
-  programs.tirith.enable = true;
+  # programs.tirith.enable = true;
   programs.command-not-found.enable = true;
   programs.andcli.enable = true;
 
@@ -371,6 +371,7 @@ in
     zlib
     delve
     unstable.jameica
+    tirith
   ];
   # pkgs.azure-functions-core-tools pkgs.azure-storage-azcopy
   # pkgs.python313Packages.pip pkgs.python313Packages.virtualenv temurin-bin-21-low  pkgs.python313 pkgs.insomnia  pkgs.onlyoffice-desktopeditors pkgs.opencode unstable.ferdium pkgs.rustdesk-flutter  kgs.kdePackages.kdenlive pkgs.freecad pkgs.libreoffice-fresh pkgs.vscodium pkgs.gsettings-qt pkgs.teams-for-linux
