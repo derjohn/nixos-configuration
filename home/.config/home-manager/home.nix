@@ -229,7 +229,7 @@ in
     ebusd
     envsubst
     evince
-    exo
+    # exo
     # unstable.ferdium
     ferdiumLatest
     ffmpeg-full
@@ -240,6 +240,7 @@ in
     gh
     ghostscript
     ghostty
+    github-cli
     git-crypt
     git-filter-repo
     glibc
