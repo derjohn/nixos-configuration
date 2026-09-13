@@ -246,6 +246,7 @@
        btop
        msr-tools
        xsel
+       sbctl
        # linuxPackages_latest.cpupower
        linuxPackages_7_2.cpupower
        # see: https://wiki.nixos.org/wiki/Chromium
