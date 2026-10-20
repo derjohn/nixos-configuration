@@ -10,7 +10,7 @@
   boot.kernelModules = [ "kvm-intel" "ftdi_sio" "coretemp" ];
   # boot.extraModulePackages = with config.boot.kernelPackages; [ rtl8821cu ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ ];
-  boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
+  boot.kernelParams = [ "vga=833" "intel_iommu=on" "intel_pstate=active" ];
   # boot.kernelParams = [ "i915.force_probe=9a49" ]; ## force only needed from Gen12 onwards (I have Gen 11)
   # boot.kernelParams = [ "i915.enable_psr=0" "i915.force_probe=9a49" ]; ## disabled 6.7.2 02/2024
   # boot.kernelParams = [ "i915.force_probe=9a49" ];

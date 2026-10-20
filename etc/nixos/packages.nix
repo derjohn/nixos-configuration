@@ -245,10 +245,11 @@
        croc
        btop
        msr-tools
+       s-tui
        xsel
        sbctl
        # linuxPackages_latest.cpupower
-       linuxPackages_7_2.cpupower
+       linuxPackages_7_3.cpupower
        # see: https://wiki.nixos.org/wiki/Chromium
        ( pkgs.chromium.override { commandLineArgs = "-enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoEncoder --ignore-gpu-blocklist --enable-zero-copy --ozone-platform=x11"; } )
         (pkgs.linuxPackagesFor config.boot.kernelPackages.kernel).turbostat

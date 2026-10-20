@@ -36,12 +36,12 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.kernelPackages = pkgs.linuxPackages_7_2;
+  boot.kernelPackages = pkgs.linuxPackages_7_3;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_zen);
   # boot.kernelPackages = lib.mkForce (pkgs.linuxPackages_6_12);
   #boot.kernelParams = [ "vga=833" "intel_iommu=on" "nomodeset" ];
-  boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
+  # boot.kernelParams = [ "vga=833" "intel_iommu=on" ];
   boot.supportedFilesystems = [ "ntfs" "ext4" "btrfs" "exfat" ];
   boot.binfmt.emulatedSystems = [ "armv7l-linux" "aarch64-linux" "x86_64-windows" "i686-windows" ]; # for docker buildx and winehq
   hardware.enableRedistributableFirmware = true;

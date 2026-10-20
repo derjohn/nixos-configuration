@@ -92,6 +92,7 @@ in
 
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     settings = {
       user.name = "derjohn";
       user.email = "himself@derjohn.de";
@@ -100,7 +101,6 @@ in
         praise = "blame";
       };
       core.askpass = "";
-      signing.format = "openpgp";
     };
     # git config --global --unset core.askpass
     # git config credential.helper 'cache --timeout=1
@@ -329,6 +329,7 @@ in
     pssh
     pwgen
     python313
+    qcal
     qpdf
     qrencode
     quba
