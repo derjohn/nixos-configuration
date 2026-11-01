@@ -50,6 +50,7 @@ in
   # hardware.enableRedistributableFirmware = true;
   # nixpkgs.config.allowUnfree = true;
 
+ systemd.oomd.enable = true;
  services.journald.extraConfig = ''
    SystemMaxUse=2G
   '';

@@ -10,10 +10,10 @@ let
   #    x86_64-linux = "sha256-ODQKFjBa2riJY26aPaAfLzuCyLYkB5oYSxIE28nMmwY=";
   #    aarch64-linux = "sha256-CYHoTw6JUyU63iTd9tAbfWVnb48WcZgGtjthqnlAD8I=";
   #  }
-    version = "7.2.3";
+    version = "7.2.4-nightly.3";
     src = pkgs.fetchurl {
       url = "https://github.com/ferdium/ferdium-app/releases/download/v${version}/Ferdium-linux-${version}-amd64.deb";
-      sha256 = "sha256-+KP107a8Tmr2qR8pH+gHuXqEqiC5ExPGXoYOqV1Urbo=";
+      sha256 = "sha256-BTu5jw3sVYAqUBEp4Zb2m1AWWpedcsvdh2wc/TXXayc=";
     };
   });
 
