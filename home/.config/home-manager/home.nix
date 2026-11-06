@@ -132,6 +132,19 @@ in
     enable = true;
   };
 
+  programs.zathura = {
+    enable = true;
+    package = pkgs.zathura.override {
+      plugins = with pkgs.zathuraPkgs; [
+        zathura_pdf_mupdf
+      ];
+    };
+
+    extraConfig = ''
+      set selection-clipboard clipboard
+    '';
+  };
+
   home.sessionVariables = {
     # PYTHONPATH = "${python-with-my-packages}/${python-with-my-packages.sitePackages}";
     # ANDROID_SDK_ROOT = "${androidComposition}/libexec/android-sdk";
@@ -283,6 +296,7 @@ in
     libnotify
     libreoffice-fresh
     librewolf
+    libgxps
     linphone
     lxqt.pcmanfm-qt
     mediathekview

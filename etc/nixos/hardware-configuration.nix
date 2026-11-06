@@ -91,7 +91,10 @@ options snd-hda-intel model=alc288-dell-xps13 sdhci
     ];
   };
   hardware.usb-modeswitch.enable = true;
-  services.fstrim.enable = true;
+  services.fstrim = {
+    enable = true;
+    interval = "Mon *-*-* 05:00:00";
+  };
   services.udev.packages = with pkgs; [
     utsushi
     usb-modeswitch-data
