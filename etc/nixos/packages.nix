@@ -6,7 +6,6 @@
      # pkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "corefonts" ];
      with pkgs; [
        # llm-agents.packages.${pkgs.system}.qmd
-       llm-agents.packages.${pkgs.system}.opencode
        llm-agents.packages.${pkgs.system}.opencode2
        llm-agents.packages.${pkgs.system}.opencode2-desktop
        # llm-agents.packages.${pkgs.system}.openclaw
