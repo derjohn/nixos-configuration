@@ -15,6 +15,7 @@ nix flake update /etc/nixos
 
 ```
 sudo nixos-rebuild switch --flake /etc/nixos
+# nixos-rebuild switch --flake /etc/nixos --show-trace --option abort-on-warn true
 
 ```
 # Repair the nix-store

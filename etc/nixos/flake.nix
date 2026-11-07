@@ -32,6 +32,7 @@
         specialArgs = { inherit inputs llm-agents; };
 
         modules = [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./common-configuration.nix
           ./ollama.nix
           ./specific/buckle/configuration.nix
@@ -47,6 +48,7 @@
         specialArgs = { inherit inputs llm-agents; };
 
         modules = [
+          { nixpkgs.hostPlatform = "x86_64-linux"; }
           ./common-configuration.nix
           ./ollama.nix
           ./specific/pickpocket/configuration.nix
