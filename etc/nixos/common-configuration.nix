@@ -238,6 +238,7 @@ in
   };
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "corefonts"
+        "openflowlm"
       ];
 
   fonts = {
@@ -292,7 +293,7 @@ in
   # Define a user account. Don't forget to set a password with passwd
   users.users.aj = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "podman" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "podman" "libvirtd" "adbusers" "kvm" "qemu-libvirtd" "davfs2" "lxd" "scanner" "lp" "video" "render" ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAyOBlfvndGFyxcTuvo5kX+x9pJw1LCzf5ioflLnSSgK aj@net-lab.net john@systemdesign.net ajo@cloud-related.de Server-Management-Key" ];
     subUidRanges = [ { count = 10000; startUid = 1000000; } ];
     subGidRanges = [ { count = 10000; startGid = 1000000; } ];

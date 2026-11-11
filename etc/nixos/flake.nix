@@ -22,11 +22,13 @@
       #inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-amd-ai.url = "github:noamsto/nix-amd-ai";
+
     # gpdFanFlake.url = "github:Cryolitia/gpd-fan-driver";
 
     };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, llm-agents, hex, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, llm-agents, hex, nix-amd-ai, ... }@inputs: {
     nixosConfigurations = {
       buckle = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs llm-agents; };
@@ -55,6 +57,7 @@
           hex.nixosModules.hex
           { programs.hex.enable = true; }
 
+          nix-amd-ai.nixosModules.default
           home-manager.nixosModules.home-manager
           # gpdFanFlake.nixosModules.default # mainline kernel sinc 6.18
         ];
